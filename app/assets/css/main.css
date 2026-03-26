@@ -1,0 +1,739 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-ink;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-image:
+      radial-gradient(
+        circle at top,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 244, 238, 0.86) 40%,
+        rgba(255, 238, 232, 1) 100%
+      ),
+      linear-gradient(
+        135deg,
+        rgba(255, 216, 230, 0.22),
+        rgba(214, 240, 213, 0.18)
+      );
+    min-height: 100vh;
+  }
+
+  ::selection {
+    background: rgba(245, 164, 198, 0.35);
+    color: #473954;
+  }
+}
+
+@layer components {
+  .section-shell {
+    @apply relative w-full px-5 sm:px-8 lg:px-12 xl:px-16 2xl:px-20;
+  }
+
+  .content-measure {
+    @apply w-full max-w-3xl xl:max-w-4xl;
+  }
+
+  .content-wide {
+    @apply w-full max-w-5xl xl:max-w-6xl 2xl:max-w-[88rem];
+  }
+
+  .section-bleed {
+    width: calc(100% + 2.5rem);
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .section-bleed {
+      width: calc(100% + 4rem);
+      margin-left: -2rem;
+      margin-right: -2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .section-bleed {
+      width: calc(100% + 7rem);
+      margin-left: -3.5rem;
+      margin-right: -3.5rem;
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .section-shell {
+      padding-left: 4.75rem;
+      padding-right: 4.75rem;
+    }
+
+    .section-bleed {
+      width: calc(100% + 10rem);
+      margin-left: -5rem;
+      margin-right: -5rem;
+    }
+
+    .content-measure {
+      max-width: 48rem;
+    }
+
+    .content-wide {
+      max-width: 92rem;
+    }
+  }
+
+  @media (min-width: 1680px) {
+    .section-shell {
+      padding-left: 6rem;
+      padding-right: 6rem;
+    }
+
+    .section-bleed {
+      width: calc(100% + 12rem);
+      margin-left: -6rem;
+      margin-right: -6rem;
+    }
+  }
+
+  .glass-panel {
+    @apply rounded-[2rem] border border-white/75 bg-white/65 backdrop-blur-xl shadow-dreamy;
+  }
+
+  .organic-card {
+    @apply rounded-[2rem] border border-white/75 bg-white/80 p-6 shadow-float backdrop-blur-md transition duration-500 ease-out;
+  }
+
+  .paper-layer {
+    position: relative;
+  }
+
+  .paper-layer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.14)
+    );
+    pointer-events: none;
+  }
+
+  .soft-tag {
+    @apply inline-flex items-center rounded-full border border-white/70 bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-ink/80 backdrop-blur;
+  }
+
+  .curve-panel-a {
+    border-radius: 38% 62% 46% 54% / 28% 33% 67% 72%;
+  }
+
+  .curve-panel-b {
+    border-radius: 58% 42% 61% 39% / 42% 30% 70% 58%;
+  }
+
+  .curve-panel-c {
+    border-radius: 30% 70% 34% 66% / 61% 33% 67% 39%;
+  }
+}
+
+@layer utilities {
+  .rounded-full {
+    isolation: isolate;
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+  }
+
+  a.rounded-full,
+  button.rounded-full,
+  .soft-tag {
+    overflow: hidden;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .asset-slot-clean {
+    display: inline-flex;
+    width: fit-content;
+    height: fit-content;
+    line-height: 0;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .noise-texture {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.3' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  .mask-wave {
+    clip-path: polygon(
+      0 4%,
+      12% 0,
+      29% 6%,
+      46% 2%,
+      65% 8%,
+      82% 1%,
+      100% 6%,
+      100% 100%,
+      0 100%
+    );
+  }
+
+  .mesh-glow {
+    background-image:
+      radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 216, 230, 0.4),
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 80% 15%,
+        rgba(230, 221, 255, 0.45),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 70% 75%,
+        rgba(214, 240, 213, 0.45),
+        transparent 30%
+      );
+  }
+
+  .edge-fade-left {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 100%);
+  }
+
+  .edge-fade-right {
+    mask-image: linear-gradient(to left, transparent, black 12%, black 100%);
+  }
+
+  .organic-outline {
+    clip-path: polygon(
+      0 8%,
+      8% 2%,
+      21% 5%,
+      34% 0,
+      50% 7%,
+      65% 2%,
+      79% 6%,
+      92% 1%,
+      100% 8%,
+      98% 93%,
+      88% 100%,
+      75% 96%,
+      60% 100%,
+      43% 95%,
+      23% 100%,
+      8% 94%,
+      0 100%
+    );
+  }
+
+  .float-orbit {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .float-orbit > * {
+    pointer-events: auto;
+  }
+
+  .doodle-interactive {
+    transition:
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 400ms ease;
+    will-change: transform;
+  }
+
+  .card-hover-soft {
+    transition:
+      transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 420ms ease,
+      background-color 320ms ease,
+      border-color 320ms ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .card-hover-lilt {
+    transition:
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 420ms ease,
+      background-color 320ms ease,
+      border-color 320ms ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .card-hover-soft:hover,
+  .card-hover-soft:focus-within {
+    transform: translate3d(0, -0.28rem, 0) scale(1.01);
+    box-shadow: 0 24px 58px rgba(95, 74, 116, 0.16);
+  }
+
+  .card-hover-lilt:hover,
+  .card-hover-lilt:focus-within {
+    transform: translate3d(0, -0.45rem, 0) rotate(0.45deg) scale(1.015);
+    box-shadow: 0 28px 72px rgba(95, 74, 116, 0.18);
+  }
+
+  /* Blob-shaped cards: filter: drop-shadow traces the real painted shape.
+     Apply .blob-card alongside .card-hover-lilt to suppress the rectangular
+     box-shadow and use a shape-aware shadow instead. */
+  .blob-card {
+    transition:
+      transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 420ms ease,
+      background-color 320ms ease,
+      border-color 320ms ease;
+    transform-origin: center;
+    will-change: transform, filter;
+  }
+
+  .blob-card:hover,
+  .blob-card:focus-within {
+    box-shadow: none;
+    filter: drop-shadow(0 18px 32px rgba(95, 74, 116, 0.22));
+    transform: translate3d(0, -0.45rem, 0) rotate(0.45deg) scale(1.015);
+  }
+
+  .tap-safe-press {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition:
+      transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 240ms ease,
+      opacity 200ms ease;
+  }
+
+  .tap-safe-press:active {
+    transform: scale(0.975);
+  }
+
+  .doodle-hover-lift:hover .doodle-interactive,
+  .doodle-hover-lift:focus-within .doodle-interactive {
+    transform: translate3d(0, -0.2rem, 0) scale(1.08) rotate(4deg);
+  }
+
+  .doodle-drift {
+    animation: doodleDrift 8.5s ease-in-out infinite;
+  }
+
+  .doodle-bob {
+    animation: doodleBob 9.5s ease-in-out infinite;
+  }
+
+  .doodle-pulse {
+    animation: doodlePulse 7.5s ease-in-out infinite;
+  }
+
+  .doodle-spin-soft {
+    animation: doodleSpinSoft 12s ease-in-out infinite;
+  }
+
+  .ambient-blob {
+    animation: ambientBlob 18s ease-in-out infinite;
+    will-change: transform, opacity;
+  }
+
+  .ambient-blob-slow {
+    animation-duration: 24s;
+  }
+
+  .ambient-blob-reverse {
+    animation-direction: reverse;
+    animation-duration: 21s;
+  }
+
+  .project-preview-blob {
+    opacity: 0;
+    transform: translate3d(1rem, -50%, 0) scale(0.82) rotate(-7deg);
+    transition:
+      opacity 650ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform, opacity;
+  }
+
+  .group:hover .project-preview-blob,
+  .group:focus-within .project-preview-blob {
+    opacity: 1;
+    transform: translate3d(0, -50%, 0) scale(1) rotate(0deg);
+  }
+
+  .project-preview-media {
+    border-radius: 62% 38% 44% 56% / 48% 31% 69% 52%;
+    overflow: hidden;
+  }
+
+  .project-preview-shell {
+    border-radius: 60% 40% 30% 70% / 45% 39% 61% 55%;
+  }
+
+  .project-preview-shell-alt {
+    border-radius: 39% 61% 55% 45% / 34% 53% 47% 66%;
+  }
+
+  /* Scroll-triggered section entrance — bidirectional, replays on scroll up/down */
+  .section-scroll-reveal {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) scale(0.99);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    /* out: fast exit */
+    transition:
+      opacity 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 380ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .section-scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    /* in: slightly slower entrance */
+    transition:
+      opacity 550ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 680ms cubic-bezier(0.12, 0.8, 0.36, 1);
+  }
+
+  .defer-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1100px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ambient-blob {
+    animation: none;
+    opacity: 0.55;
+  }
+
+  .noise-texture {
+    opacity: 0.2;
+  }
+}
+
+@media (max-width: 639px) {
+  .section-scroll-reveal {
+    transform: translate3d(0, 24px, 0) scale(0.994);
+    transition:
+      opacity 260ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .section-scroll-reveal.is-visible {
+    transition:
+      opacity 440ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 540ms cubic-bezier(0.12, 0.8, 0.36, 1);
+  }
+
+  body {
+    background-image:
+      radial-gradient(
+        circle at top,
+        rgba(255, 255, 255, 0.92),
+        rgba(255, 244, 238, 0.9) 44%,
+        rgba(255, 238, 232, 1) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 226, 237, 0.18),
+        rgba(228, 243, 236, 0.15)
+      );
+  }
+
+  .section-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section-bleed {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .curve-panel-a,
+  .curve-panel-b,
+  .curve-panel-c {
+    border-radius: 2rem;
+  }
+
+  .paper-layer::before,
+  .mesh-glow {
+    opacity: 0.72;
+  }
+
+  .shadow-dreamy {
+    box-shadow: 0 18px 40px rgba(95, 74, 116, 0.12) !important;
+  }
+
+  .shadow-float {
+    box-shadow: 0 12px 28px rgba(95, 74, 116, 0.1) !important;
+  }
+
+  .card-hover-soft:hover,
+  .card-hover-soft:focus-within,
+  .card-hover-lilt:hover,
+  .card-hover-lilt:focus-within,
+  .doodle-hover-lift:hover .doodle-interactive,
+  .doodle-hover-lift:focus-within .doodle-interactive {
+    transform: none;
+  }
+
+  .tap-safe-press:active {
+    transform: scale(0.985);
+  }
+}
+
+html.browser-chrome .ambient-blob {
+  animation: none;
+  opacity: 0.42;
+}
+
+html.browser-chrome .noise-texture {
+  opacity: 0.12;
+}
+
+html.browser-chrome .backdrop-blur,
+html.browser-chrome .backdrop-blur-md,
+html.browser-chrome .backdrop-blur-lg,
+html.browser-chrome .backdrop-blur-xl {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+html.browser-chrome .shadow-dreamy,
+html.browser-chrome .shadow-float {
+  box-shadow: 0 14px 30px rgba(71, 57, 84, 0.1) !important;
+}
+
+html.browser-chrome .section-scroll-reveal {
+  transform: none !important;
+}
+
+html.browser-chrome .section-scroll-reveal.is-visible {
+  transition: opacity 700ms ease !important;
+}
+
+html.browser-chrome .group,
+html.browser-chrome .group * {
+  will-change: auto;
+}
+
+html.browser-chrome .animate-float,
+html.browser-chrome .animate-drift,
+html.browser-chrome .animate-pulse-soft,
+html.browser-chrome .doodle-drift,
+html.browser-chrome .doodle-bob,
+html.browser-chrome .doodle-pulse,
+html.browser-chrome .doodle-spin-soft {
+  animation: none !important;
+}
+
+html.browser-chrome .transition,
+html.browser-chrome .transition-all,
+html.browser-chrome .transition-transform,
+html.browser-chrome .duration-300,
+html.browser-chrome .duration-500 {
+  transition-duration: 160ms !important;
+}
+
+html.browser-chrome .hover\:-translate-y-1:hover,
+html.browser-chrome .hover\:-translate-y-2:hover,
+html.browser-chrome .hover\:scale-\[1\.03\]:hover,
+html.browser-chrome .hover\:scale-\[1\.04\]:hover,
+html.browser-chrome .hover\:scale-\[1\.05\]:hover,
+html.browser-chrome .card-hover-soft:hover,
+html.browser-chrome .card-hover-soft:focus-within,
+html.browser-chrome .card-hover-lilt:hover,
+html.browser-chrome .card-hover-lilt:focus-within,
+html.browser-chrome .tap-safe-press:active,
+html.browser-chrome .doodle-hover-lift:hover .doodle-interactive,
+html.browser-chrome .group-hover\:-translate-y-2,
+html.browser-chrome .group-hover\:scale-\[1\.04\],
+html.browser-chrome .group-hover\:rotate-\[2deg\] {
+  transform: none !important;
+}
+
+@keyframes ambientBlob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.72;
+  }
+
+  33% {
+    transform: translate3d(1.25rem, -1rem, 0) scale(1.06);
+    opacity: 0.84;
+  }
+
+  66% {
+    transform: translate3d(-0.8rem, 1rem, 0) scale(0.96);
+    opacity: 0.68;
+  }
+}
+
+@keyframes doodleDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0.55rem, -0.7rem, 0);
+  }
+}
+
+@keyframes doodleBob {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(-0.35rem, -0.6rem, 0) rotate(-2deg);
+  }
+}
+
+@keyframes doodlePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.82;
+  }
+
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes doodleSpinSoft {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-blob,
+  .ambient-blob-slow,
+  .ambient-blob-reverse,
+  .doodle-drift,
+  .doodle-bob,
+  .doodle-pulse,
+  .doodle-spin-soft {
+    animation: none !important;
+  }
+
+  .doodle-interactive,
+  .project-preview-blob {
+    transition: none !important;
+  }
+
+  .section-scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ─── CSS Scroll-Driven Parallax ─────────────────────────────────────────── */
+/* Progressive enhancement: only active in browsers that support scroll timelines */
+@supports (animation-timeline: view()) {
+  /*
+   * .parallax-up / .parallax-up-sm
+   * Decorative elements (blobs, floats) that drift upward slightly as
+   * their section scrolls through the viewport — creates visual depth.
+   */
+  .parallax-up {
+    animation: parallaxUpFull linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  .parallax-up-sm {
+    animation: parallaxUpSm linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  /*
+   * .parallax-down
+   * Elements that stay behind / drift downward — e.g. background mesh glows.
+   */
+  .parallax-down {
+    animation: parallaxDown linear both;
+    animation-timeline: view();
+    animation-range: entry 0% exit 100%;
+  }
+
+  @keyframes parallaxUpFull {
+    from {
+      transform: translateY(3.5rem);
+    }
+    to {
+      transform: translateY(-3.5rem);
+    }
+  }
+
+  @keyframes parallaxUpSm {
+    from {
+      transform: translateY(1.75rem);
+    }
+    to {
+      transform: translateY(-1.75rem);
+    }
+  }
+
+  @keyframes parallaxDown {
+    from {
+      transform: translateY(-2rem);
+    }
+    to {
+      transform: translateY(2rem);
+    }
+  }
+}
+
+/* Disable parallax when reduced motion is requested */
+@media (prefers-reduced-motion: reduce) {
+  .parallax-up,
+  .parallax-up-sm,
+  .parallax-down {
+    animation: none !important;
+  }
+}
+
+body::-webkit-scrollbar {
+  width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+body::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(245, 164, 198, 0.9),
+    rgba(158, 200, 170, 0.9)
+  );
+  border: 3px solid rgba(255, 250, 246, 0.8);
+  border-radius: 999px;
+}
