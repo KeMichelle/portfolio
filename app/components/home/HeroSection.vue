@@ -270,7 +270,7 @@ useTilt(portraitRef, 7, 5);
               href="#web-projects"
               class="inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-white shadow-dreamy transition duration-300 hover:-translate-y-1 hover:bg-rose"
             >
-              View the work
+              View my work
             </a>
             <a
               href="#about"
