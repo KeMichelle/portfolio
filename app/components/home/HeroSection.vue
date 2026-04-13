@@ -227,13 +227,20 @@ useTilt(portraitRef, 7, 5);
             <p
               class="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/52 mb-2.5"
             >
-              Web designer &amp; developer
+              Front-end engineer + freelance web designer
             </p>
-            <p
-              class="font-display text-[1.45rem] font-normal leading-[1.18] text-ink sm:text-[1.7rem]"
+            <h1
+              class="font-display text-[1.5rem] font-normal leading-[1.12] text-ink sm:text-[1.8rem]"
             >
-              Crafting soft, editorial websites with a focus on storytelling and
-              visual identity.
+              Michelle Aprile creates thoughtful front-end experiences and soft,
+              editorial websites.
+            </h1>
+            <p
+              class="mt-3 text-sm leading-6 text-ink/68 sm:text-[0.98rem] sm:leading-7"
+            >
+              Based in London, I work across product interfaces and freelance
+              sites with calm structure, visual sensitivity, and a strong eye
+              for detail.
             </p>
           </div>
         </div>

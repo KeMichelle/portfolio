@@ -14,14 +14,74 @@ import ProofSection from '~/components/home/ProofSection.vue';
 import SkillsSection from '~/components/home/SkillsSection.vue';
 import WebProjectsSection from '~/components/home/WebProjectsSection.vue';
 
+const requestUrl = useRequestURL();
+const siteUrl = requestUrl.origin;
+const canonicalUrl = `${siteUrl}${requestUrl.pathname}`;
+const seoTitle =
+  'Michelle Aprile | Front-End Engineer & Freelance Web Designer';
+const seoDescription =
+  'Michelle Aprile is a front-end engineer and freelance web designer in London, creating thoughtful product interfaces and soft, editorial websites with Vue, Nuxt, TypeScript, and a strong visual eye.';
+const ogImage = `${siteUrl}/michelle_cutout.png`;
+
 useSeoMeta({
-  title: 'Michelle Aprile',
-  description:
-    'Michelle Aprile is a London-based Software Engineer with 2+ years of experience across Vue, Nuxt, Angular, React, TypeScript, and Cypress, with a soft creative eye for styling and visual storytelling.',
-  ogTitle: 'Michelle Aprile',
-  ogDescription:
-    'A soft, grounded portfolio for Michelle Aprile: Software Engineer, creative developer, and stylist based in London.',
+  title: seoTitle,
+  description: seoDescription,
+  ogTitle: seoTitle,
+  ogDescription: seoDescription,
+  ogType: 'website',
+  ogLocale: 'en_GB',
+  ogUrl: canonicalUrl,
+  ogImage,
+  ogImageAlt: 'Michelle Aprile, front-end engineer and freelance web designer',
+  twitterTitle: seoTitle,
+  twitterDescription: seoDescription,
   twitterCard: 'summary_large_image',
+  twitterImage: ogImage,
+});
+
+useHead({
+  link: [
+    {
+      rel: 'canonical',
+      href: canonicalUrl,
+    },
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Michelle Aprile',
+        url: canonicalUrl,
+        image: ogImage,
+        description: seoDescription,
+        jobTitle: 'Front-End Engineer and Freelance Web Designer',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'London',
+          addressCountry: 'GB',
+        },
+        sameAs: [
+          'https://www.linkedin.com/in/michelleaprile04/',
+          'https://github.com/KeMichelle',
+          'https://www.instagram.com/pastelmichy/',
+        ],
+        knowsAbout: [
+          'Front-end engineering',
+          'Freelance web design',
+          'Vue',
+          'Nuxt',
+          'TypeScript',
+          'React',
+          'Angular',
+          'Cypress',
+          'UI design',
+          'Responsive web design',
+        ],
+      }),
+    },
+  ],
 });
 
 // Scroll-triggered section entrances — each section materialises as it enters the viewport
