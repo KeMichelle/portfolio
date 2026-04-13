@@ -3,11 +3,13 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "build": "node node_modules/nuxt/bin/nuxt.mjs build",
+    "dev": "node node_modules/nuxt/bin/nuxt.mjs dev",
+    "dev:host": "node node_modules/nuxt/bin/nuxt.mjs dev --host",
+    "dev:mobile": "node node_modules/nuxt/bin/nuxt.mjs dev --host",
+    "generate": "node node_modules/nuxt/bin/nuxt.mjs generate",
+    "preview": "node node_modules/nuxt/bin/nuxt.mjs preview",
+    "postinstall": "node node_modules/nuxt/bin/nuxt.mjs prepare"
   },
   "dependencies": {
     "@nuxt/image": "^2.0.0",

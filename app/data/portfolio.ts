@@ -13,8 +13,12 @@ export interface ShowcaseProject {
   highlights?: string[];
   href?: string;
   hrefLabel?: string;
+  repoHref?: string;
+  repoLabel?: string;
   previewSrc?: string;
   previewTone?: string;
+  previewScale?: number;
+  previewBubbleSize?: number;
 }
 
 export interface StoryMoment {
@@ -75,59 +79,71 @@ export const servicePillars: ServicePillar[] = [
 
 export const webProjects: ShowcaseProject[] = [
   {
-    title: 'Edup Global Flex',
+    title: 'EDUP Global Flex',
     type: 'Live client project',
     blurb:
-      'A website I built for a wellness client, focused on keeping things simple, calm, and easy to understand.',
+      'A website designed and developed for a UK-based wellness brand, focused on presenting specialised products in a clear, approachable way.',
     tech: ['Nuxt', 'TypeScript', 'Responsive UI'],
     tone: 'bg-gradient-to-br from-white via-blush/50 to-peach/60',
     tilt: 'sm:-rotate-2',
-    metric: 'Wellness client',
-    note: 'The goal was to present the product in a way that feels natural and approachable, something that fits into people’s everyday life rather than feeling technical or overwhelming. I worked on the structure, layout, and front-end to make sure everything feels clear, responsive, and easy to navigate.',
+    metric: 'Authorised UK distributor',
+    note: 'The goal was to simplify complex information and create a calm, trustworthy experience that fits naturally into users\u2019 everyday lives. The structure, layout, and front-end were built to guide users smoothly through the content, while maintaining a soft and non-clinical visual direction.',
     href: 'https://edupglobalflex.co.uk/',
     hrefLabel: 'View live site',
+    repoHref: 'https://github.com/KeMichelle/eduardo-website',
+    repoLabel: 'GitHub repo',
     previewSrc: '/edup_video.mp4',
     previewTone: 'from-blush/65 via-white/85 to-peach/55',
     highlights: [
-      'Clear and simple content structure',
-      'Calm, soft visual direction',
-      'Fully responsive layout',
+      'Clear and structured content architecture',
+      'Calm, approachable visual direction',
+      'Fully responsive across devices',
     ],
   },
   {
-    title: 'Photographer portfolio',
-    type: 'Next project',
+    title: 'Valentina \u2014 Photographer Portfolio',
+    type: 'In progress',
     blurb:
-      'I’m currently working on a website for a photographer. This one will be more visual and image-led, with a focus on layout, storytelling, and letting the work speak for itself.',
-    tech: ['Image-led layout', 'Storytelling', 'Visual direction'],
+      'A portfolio website designed to showcase photographic work through a more visual, editorial approach.',
+    tech: ['Image-led layout', 'Visual storytelling', 'Editorial structure'],
     tone: 'bg-gradient-to-br from-white via-lavender/55 to-mint/50',
     tilt: 'sm:rotate-1',
     metric: 'In progress',
     status: 'In progress',
-    note: 'Still building, more soon.',
+    note: 'This project focuses on layout, rhythm, and storytelling \u2014 allowing the imagery to lead, while keeping the experience clean and unobtrusive.',
+    repoHref: 'https://github.com/KeMichelle/vale',
+    repoLabel: 'GitHub repo',
+    previewSrc: '/vale_video.mp4',
     previewTone: 'from-lavender/60 via-white/85 to-mint/50',
+    previewScale: 1.04,
+    previewBubbleSize: 264,
     highlights: [
-      'More visual and image-led',
-      'A stronger focus on layout and rhythm',
-      'Built to let the work speak for itself',
+      'Image-led layout',
+      'Visual storytelling',
+      'Editorial structure',
     ],
   },
   {
-    title: 'To be defined',
-    type: 'Upcoming project',
+    title: 'Diana \u2014 Makeup Artist Portfolio',
+    type: 'Next project',
     blurb:
-      'I’m leaving space here for the next project, something new I want to explore further, either more creative or more product-focused.',
-    tech: ['New direction', 'Creative or product', 'More soon'],
+      'An upcoming portfolio for a makeup artist, designed to highlight services, aesthetic identity, and client work in a soft and refined way.',
+    tech: [
+      'Service-based structure',
+      'Strong visual identity',
+      'Elegant layout',
+    ],
     tone: 'bg-gradient-to-br from-white via-butter/55 to-blush/45',
     tilt: 'sm:-rotate-1',
     metric: 'Coming soon',
     status: 'Coming soon',
-    note: 'A space I’m keeping open on purpose so the next project can arrive without feeling like filler.',
+    note: 'The direction combines clean structure with a more expressive, beauty-focused visual style.',
+    repoLabel: 'Repo coming soon',
     previewTone: 'from-butter/55 via-white/85 to-blush/50',
     highlights: [
-      'Intentional space for what comes next',
-      'Open to something more creative',
-      'Or something more product-focused',
+      'Service-based structure',
+      'Strong visual identity',
+      'Elegant, user-friendly layout',
     ],
   },
 ];
@@ -273,18 +289,21 @@ export const contactLinks: ContactLink[] = [
   {
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/michelleaprile04/',
-    caption: 'For roles, introductions, and a more direct professional hello.',
+    caption: 'For roles, introductions, and professional enquiries.',
   },
   {
     label: 'GitHub',
     href: 'https://github.com/KeMichelle',
-    caption:
-      'Public code, smaller experiments, and the technical layer behind the visuals.',
+    caption: 'Code, experiments, and the technical side of my work.',
+  },
+  {
+    label: 'Instagram',
+    href: 'https://www.instagram.com/pastelmichy/',
+    caption: 'Visual mood, personal work, and behind the scenes.',
   },
   {
     label: 'Email',
     href: 'mailto:michelleaprile2004@gmail.com',
-    caption:
-      'For direct notes, freelance enquiries, and personal styling requests.',
+    caption: 'For freelance projects, collaborations, or a direct hello.',
   },
 ];

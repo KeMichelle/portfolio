@@ -25,14 +25,6 @@ const links = [
     rotate: '2deg',
   },
   {
-    label: 'Styling',
-    href: '#styling',
-    chip: 'nav-pill-lavender',
-    mobileBg: 'rgba(230,221,255,0.82)',
-    emoji: '✨',
-    rotate: '-2deg',
-  },
-  {
     label: 'About',
     href: '#about',
     chip: 'nav-pill-butter',
@@ -103,7 +95,11 @@ const links = [
 
     <!-- Mobile drawer -->
     <Transition name="drawer">
-      <nav v-if="menuOpen" aria-label="Mobile primary" class="mobile-drawer mt-2 md:hidden">
+      <nav
+        v-if="menuOpen"
+        aria-label="Mobile primary"
+        class="mobile-drawer mt-2 md:hidden"
+      >
         <ul class="mobile-nav-list">
           <li
             v-for="(link, i) in links"
@@ -142,11 +138,36 @@ const links = [
   transform-origin: center;
 }
 
-.nav-pill-rose:hover  { background: rgba(255,216,230,0.88); color: #a03068; border-radius: 62% 38% 44% 56% / 48% 31% 69% 52%; transform: rotate(-1.6deg) scale(1.05); }
-.nav-pill-mint:hover  { background: rgba(214,240,213,0.90); color: #1c5e35; border-radius: 38% 62% 56% 44% / 52% 69% 31% 48%; transform: rotate(1.2deg) scale(1.05); }
-.nav-pill-lavender:hover { background: rgba(230,221,255,0.90); color: #5c3ba3; border-radius: 50% 50% 38% 62% / 62% 38% 62% 38%; transform: rotate(-0.9deg) scale(1.05); }
-.nav-pill-butter:hover { background: rgba(255,241,184,0.95); color: #7a6004; border-radius: 44% 56% 62% 38% / 38% 52% 48% 62%; transform: rotate(1.8deg) scale(1.05); }
-.nav-pill-peach:hover  { background: rgba(255,214,194,0.90); color: #8c3c14; border-radius: 56% 44% 38% 62% / 52% 62% 38% 48%; transform: rotate(-1.2deg) scale(1.05); }
+.nav-pill-rose:hover {
+  background: rgba(255, 216, 230, 0.88);
+  color: #a03068;
+  border-radius: 62% 38% 44% 56% / 48% 31% 69% 52%;
+  transform: rotate(-1.6deg) scale(1.05);
+}
+.nav-pill-mint:hover {
+  background: rgba(214, 240, 213, 0.9);
+  color: #1c5e35;
+  border-radius: 38% 62% 56% 44% / 52% 69% 31% 48%;
+  transform: rotate(1.2deg) scale(1.05);
+}
+.nav-pill-lavender:hover {
+  background: rgba(230, 221, 255, 0.9);
+  color: #5c3ba3;
+  border-radius: 50% 50% 38% 62% / 62% 38% 62% 38%;
+  transform: rotate(-0.9deg) scale(1.05);
+}
+.nav-pill-butter:hover {
+  background: rgba(255, 241, 184, 0.95);
+  color: #7a6004;
+  border-radius: 44% 56% 62% 38% / 38% 52% 48% 62%;
+  transform: rotate(1.8deg) scale(1.05);
+}
+.nav-pill-peach:hover {
+  background: rgba(255, 214, 194, 0.9);
+  color: #8c3c14;
+  border-radius: 56% 44% 38% 62% / 52% 62% 38% 48%;
+  transform: rotate(-1.2deg) scale(1.05);
+}
 
 /* ── Burger button ──────────────────────────────────────────────── */
 .burger-btn {
@@ -154,15 +175,22 @@ const links = [
   border: 1.5px solid rgba(255, 255, 255, 0.65);
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(8px);
-  box-shadow: 0 4px 14px rgba(71, 57, 84, 0.10);
+  box-shadow: 0 4px 14px rgba(71, 57, 84, 0.1);
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms ease;
+  transition:
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms ease;
 }
 
-.burger-btn:active { transform: scale(0.90); }
-.burger-btn.is-open { background: rgba(255, 216, 230, 0.82); border-color: rgba(245, 164, 198, 0.55); }
+.burger-btn:active {
+  transform: scale(0.9);
+}
+.burger-btn.is-open {
+  background: rgba(255, 216, 230, 0.82);
+  border-color: rgba(245, 164, 198, 0.55);
+}
 
 .burger-bun {
   position: absolute;
@@ -174,23 +202,41 @@ const links = [
   transform-origin: center;
   transition:
     transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity   240ms ease,
-    top       360ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 240ms ease,
+    top 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.burger-top { top: calc(50% - 5px); transform: translateX(-50%); }
-.burger-mid { top: calc(50% - 1px); transform: translateX(-50%); }
-.burger-bot { top: calc(50% + 3px); transform: translateX(-50%); }
+.burger-top {
+  top: calc(50% - 5px);
+  transform: translateX(-50%);
+}
+.burger-mid {
+  top: calc(50% - 1px);
+  transform: translateX(-50%);
+}
+.burger-bot {
+  top: calc(50% + 3px);
+  transform: translateX(-50%);
+}
 
 /* Morphs to × when open */
-.burger-btn.is-open .burger-top { top: calc(50% - 1px); transform: translateX(-50%) rotate(45deg); }
-.burger-btn.is-open .burger-mid { opacity: 0; transform: translateX(-50%) scaleX(0); }
-.burger-btn.is-open .burger-bot { top: calc(50% - 1px); transform: translateX(-50%) rotate(-45deg); }
+.burger-btn.is-open .burger-top {
+  top: calc(50% - 1px);
+  transform: translateX(-50%) rotate(45deg);
+}
+.burger-btn.is-open .burger-mid {
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0);
+}
+.burger-btn.is-open .burger-bot {
+  top: calc(50% - 1px);
+  transform: translateX(-50%) rotate(-45deg);
+}
 
 /* ── Mobile drawer ──────────────────────────────────────────────── */
 .mobile-drawer {
   border-radius: 1.75rem;
-  border: 1.5px solid rgba(255, 255, 255, 0.70);
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
   background: rgba(255, 250, 246, 0.94);
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 60px rgba(71, 57, 84, 0.14);
@@ -199,10 +245,14 @@ const links = [
 }
 
 .drawer-enter-active {
-  transition: opacity 340ms cubic-bezier(0.22, 1, 0.36, 1), transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition:
+    opacity 340ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .drawer-leave-active {
-  transition: opacity 220ms ease, transform 260ms cubic-bezier(0.55, 0, 0.55, 0.85);
+  transition:
+    opacity 220ms ease,
+    transform 260ms cubic-bezier(0.55, 0, 0.55, 0.85);
 }
 .drawer-enter-from,
 .drawer-leave-to {
@@ -229,8 +279,14 @@ const links = [
 }
 
 @keyframes navItemBounce {
-  from { opacity: 0; transform: rotate(var(--r, 0deg)) translateY(14px) scale(0.92); }
-  to   { opacity: 1; transform: rotate(var(--r, 0deg)) translateY(0)    scale(1);    }
+  from {
+    opacity: 0;
+    transform: rotate(var(--r, 0deg)) translateY(14px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(var(--r, 0deg)) translateY(0) scale(1);
+  }
 }
 
 .mobile-nav-link {
@@ -244,10 +300,21 @@ const links = [
   -webkit-tap-highlight-color: transparent;
   transition: opacity 160ms ease;
 }
-.mobile-nav-link:active { opacity: 0.70; }
+.mobile-nav-link:active {
+  opacity: 0.7;
+}
 
-.mobile-nav-emoji { font-size: 1.2rem; line-height: 1; flex-shrink: 0; }
-.mobile-nav-label { font-size: 1rem; font-weight: 600; color: rgba(71, 57, 84, 0.90); letter-spacing: 0.01em; }
+.mobile-nav-emoji {
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.mobile-nav-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(71, 57, 84, 0.9);
+  letter-spacing: 0.01em;
+}
 
 .mobile-cta {
   display: block;
@@ -265,17 +332,70 @@ const links = [
   box-shadow: 0 8px 22px rgba(71, 57, 84, 0.22);
   animation: navItemBounce 400ms cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: 300ms;
-  transition: opacity 160ms ease, transform 160ms ease;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
   text-decoration: none;
 }
-.mobile-cta:active { opacity: 0.88; transform: scale(0.97); }
+.mobile-cta:active {
+  opacity: 0.88;
+  transform: scale(0.97);
+}
+
+@media (max-width: 639px) {
+  .glass-panel {
+    border-radius: 1.55rem 1.9rem 1.5rem 1.8rem / 1.4rem 1.8rem 1.6rem 2rem;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 251, 247, 0.88),
+      rgba(255, 244, 247, 0.74)
+    );
+    box-shadow: 0 18px 48px rgba(71, 57, 84, 0.12);
+  }
+
+  .mobile-drawer {
+    margin-top: 0.55rem;
+    border-radius: 2.15rem 1.8rem 2.2rem 1.85rem / 1.7rem 2.2rem 1.9rem 2.35rem;
+    background:
+      radial-gradient(
+        circle at top left,
+        rgba(255, 236, 170, 0.4),
+        transparent 28%
+      ),
+      linear-gradient(
+        160deg,
+        rgba(255, 250, 246, 0.95),
+        rgba(255, 240, 246, 0.92)
+      );
+    box-shadow: 0 24px 64px rgba(71, 57, 84, 0.14);
+    transform-origin: top center;
+  }
+
+  .mobile-nav-list {
+    gap: 0.7rem;
+  }
+
+  .mobile-nav-item:nth-child(odd) {
+    margin-right: 0.8rem;
+  }
+
+  .mobile-nav-item:nth-child(even) {
+    margin-left: 0.8rem;
+  }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .nav-pill,
-  .burger-bun { transition: none; }
+  .burger-bun {
+    transition: none;
+  }
   .mobile-nav-item,
-  .mobile-cta { animation: none; }
+  .mobile-cta {
+    animation: none;
+  }
   .drawer-enter-active,
-  .drawer-leave-active { transition: none; }
+  .drawer-leave-active {
+    transition: none;
+  }
 }
 </style>

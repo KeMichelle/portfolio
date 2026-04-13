@@ -1,75 +1,75 @@
-# Nuxt Minimal Starter
+# Michelle Aprile — Portfolio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is my personal portfolio, designed and built to feel soft, playful, and a bit more expressive than a typical developer site.
 
-## Setup
+I wanted it to feel like me ✨ somewhere between front-end engineering, visual design, and a slightly dreamy vibe🌸
 
-Make sure to install dependencies:
+It brings together selected work, ongoing projects, and a simple way to present how I think about UI and product design.
+
+---
+
+## Tech
+
+Built with:
+
+- Nuxt
+- Vue
+- TypeScript
+- Tailwind CSS
+
+---
+
+## Running it locally
+
+Install dependencies:
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+Start the dev server:
 
 ```bash
-# npm
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
-
-Build the application for production:
+If you want to run it on your network (mobile testing, etc.):
 
 ```bash
-# npm
+npm run dev:mobile
+```
+
+---
+
+## Build
+
+Create a production build:
+
+```bash
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Preview it locally:
 
 ```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+---
+
+## Notes
+
+This portfolio is intentionally not corporate.
+
+I care more about how it _feels to use_ than making it look like a standard developer template.
+
+The goal was a balance between:
+
+- clean implementation
+- thoughtful UI decisions
+- and a slightly more personal, expressive visual language
+
+---
+
+If you’re here as a client or employer — this is the kind of work I like doing:
+simple, well-built interfaces that still feel considered and human.

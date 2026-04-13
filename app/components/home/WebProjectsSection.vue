@@ -5,6 +5,8 @@ import MotionReveal from '~/components/shared/MotionReveal.vue';
 import SectionHeading from '~/components/shared/SectionHeading.vue';
 import StickerChip from '~/components/shared/StickerChip.vue';
 
+const { showPreview, clearPreview } = useCursorPreview();
+
 defineProps<{
   projects: ShowcaseProject[];
 }>();
@@ -31,6 +33,52 @@ const highlightBlobShapes = [
 
 const decorativeTrack =
   'data:text/vtt;charset=utf-8,WEBVTT%0A%0A00:00.000%20-->%2000:10.000%0ADecorative%20project%20preview%0A';
+
+function handleProjectPointerEnter(
+  project: ShowcaseProject,
+  event: PointerEvent,
+) {
+  if (event.pointerType !== 'mouse' || !project.previewSrc) return;
+
+  showPreview({
+    mode: 'video',
+    src: project.previewSrc,
+    title: project.title,
+    scale: project.previewScale,
+    bubbleSize: project.previewBubbleSize,
+  });
+}
+
+function showProjectPreview(project: ShowcaseProject) {
+  if (!project.previewSrc) {
+    clearPreview();
+    return;
+  }
+
+  showPreview({
+    mode: 'video',
+    src: project.previewSrc,
+    title: project.title,
+    scale: project.previewScale,
+    bubbleSize: project.previewBubbleSize,
+  });
+}
+
+function handleProjectLinkEnter(title: string, subtitle: string) {
+  showPreview({
+    mode: 'link',
+    title,
+    subtitle,
+  });
+}
+
+function handleProjectLinkLeave(project: ShowcaseProject) {
+  showProjectPreview(project);
+}
+
+function handleProjectPointerLeave() {
+  clearPreview();
+}
 </script>
 
 <template>
@@ -60,6 +108,27 @@ const decorativeTrack =
           :rotate="7"
         />
       </div>
+      <!-- Mobile-only stickers -->
+      <div
+        class="pointer-events-none absolute -right-1 top-4 z-10 block lg:hidden"
+      >
+        <img
+          src="/yellow_sparkle_1.gif"
+          alt=""
+          aria-hidden="true"
+          class="w-10 rotate-[12deg] object-contain opacity-90"
+        />
+      </div>
+      <div
+        class="pointer-events-none absolute left-3 top-1/2 z-10 block lg:hidden"
+      >
+        <img
+          src="/heart.png"
+          alt=""
+          aria-hidden="true"
+          class="w-8 -rotate-[14deg] object-contain opacity-80"
+        />
+      </div>
       <img
         src="/random_lines.png"
         alt=""
@@ -81,12 +150,12 @@ const decorativeTrack =
         >
           <SectionHeading
             eyebrow="Web projects"
-            title="A small selection of work I’ve built so far, more coming soon."
-            description="Right now this is a mix of one real client project and a couple of things I’m currently working on, or intentionally leaving space for next."
+            title="A selection of recent work, combining client projects and ongoing builds."
+            description="Each project focuses on clarity, structure, and creating experiences that feel simple, calm, and easy to use."
           />
 
           <div
-            class="card-hover-lilt paper-layer rounded-[2.25rem] border border-white/60 bg-white/60 p-5 shadow-float backdrop-blur-xl"
+            class="hidden sm:block card-hover-lilt paper-layer rounded-[2.25rem] border border-white/60 bg-white/60 p-5 shadow-float backdrop-blur-xl"
           >
             <div class="absolute -right-3 -top-3 hidden sm:block">
               <img
@@ -97,8 +166,8 @@ const decorativeTrack =
               />
             </div>
             <p class="text-sm leading-7 text-ink/72 sm:text-base">
-              I wanted this section to stay honest: one live website, one build
-              in progress, and one space I’m saving for whatever comes next.
+              A selection of recent and ongoing work, with new projects
+              currently in development.
             </p>
           </div>
         </MotionReveal>
@@ -112,7 +181,7 @@ const decorativeTrack =
           >
             <article
               :class="[
-                'group card-hover-lilt paper-layer relative overflow-visible rounded-[2.7rem] border border-white/60 p-6 shadow-float backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1 hover:shadow-dreamy sm:p-8',
+                'group project-story-card card-hover-lilt paper-layer relative overflow-visible rounded-[2.7rem] border border-white/60 p-6 shadow-float backdrop-blur-xl transition duration-500 ease-out hover:-translate-y-1 hover:shadow-dreamy sm:p-8',
                 project.tone,
                 project.tilt,
                 project.status ? 'opacity-95' : '',
@@ -120,6 +189,8 @@ const decorativeTrack =
                 index === 1 ? 'sm:ml-8 xl:ml-20 min-[1440px]:ml-28' : '',
                 index === 2 ? 'xl:-ml-6 min-[1440px]:-ml-14' : '',
               ]"
+              @pointerenter="handleProjectPointerEnter(project, $event)"
+              @pointerleave="handleProjectPointerLeave"
             >
               <div
                 v-if="project.previewSrc"
@@ -180,7 +251,7 @@ const decorativeTrack =
                 class="absolute right-10 -top-6 hidden w-16 rotate-[14deg] object-contain opacity-90 xl:block animate-drift"
               />
               <div
-                class="relative z-10 grid gap-6 lg:grid-cols-[1.22fr_0.78fr] lg:items-start lg:gap-8 min-[1440px]:gap-10"
+                class="project-inner-grid relative z-10 grid gap-6 lg:grid-cols-[1.22fr_0.78fr] lg:items-start lg:gap-8 min-[1440px]:gap-10"
               >
                 <div>
                   <div class="flex flex-wrap items-center gap-3">
@@ -199,7 +270,7 @@ const decorativeTrack =
                   </div>
 
                   <h3
-                    class="mt-5 font-display text-4xl font-semibold text-ink sm:text-5xl"
+                    class="mt-5 font-display text-5xl font-semibold leading-[1.0] text-ink"
                   >
                     {{ project.title }}
                   </h3>
@@ -217,15 +288,46 @@ const decorativeTrack =
                     {{ project.note }}
                   </p>
 
-                  <a
-                    v-if="project.href"
-                    :href="project.href"
-                    target="_blank"
-                    rel="noreferrer"
-                    class="mt-5 inline-flex text-sm font-semibold text-ink underline decoration-rose/50 underline-offset-4"
-                  >
-                    {{ project.hrefLabel || 'Open project' }}
-                  </a>
+                  <div class="mt-5 flex flex-wrap gap-3">
+                    <a
+                      v-if="project.href"
+                      :href="project.href"
+                      target="_blank"
+                      rel="noreferrer"
+                      class="inline-flex rounded-full border border-white/70 bg-white/72 px-4 py-2 text-sm font-semibold text-ink shadow-float transition duration-300 hover:-translate-y-0.5 hover:bg-white"
+                      @pointerenter="
+                        handleProjectLinkEnter(
+                          project.hrefLabel || 'Open project',
+                          'Website link',
+                        )
+                      "
+                      @pointerleave="handleProjectLinkLeave(project)"
+                    >
+                      {{ project.hrefLabel || 'Open project' }}
+                    </a>
+                    <a
+                      v-if="project.repoHref"
+                      :href="project.repoHref"
+                      target="_blank"
+                      rel="noreferrer"
+                      class="inline-flex rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white shadow-float transition duration-300 hover:-translate-y-0.5 hover:bg-[#5a4767]"
+                      @pointerenter="
+                        handleProjectLinkEnter(
+                          project.repoLabel || 'GitHub repo',
+                          'Repository link',
+                        )
+                      "
+                      @pointerleave="handleProjectLinkLeave(project)"
+                    >
+                      {{ project.repoLabel || 'GitHub repo' }}
+                    </a>
+                    <span
+                      v-else-if="project.repoLabel"
+                      class="inline-flex rounded-full border border-white/65 bg-white/48 px-4 py-2 text-sm font-semibold text-ink/58 shadow-float"
+                    >
+                      {{ project.repoLabel }}
+                    </span>
+                  </div>
 
                   <div class="mt-6 flex flex-wrap gap-2">
                     <span
@@ -238,10 +340,15 @@ const decorativeTrack =
                   </div>
                 </div>
 
-                <div :class="['space-y-4', index === 1 ? 'lg:-mt-8' : '']">
+                <div
+                  :class="[
+                    'project-media-col space-y-4',
+                    index === 1 ? 'lg:-mt-8' : '',
+                  ]"
+                >
                   <div
                     v-if="project.previewSrc"
-                    class="card-hover-soft curve-panel-b flex min-h-[13rem] overflow-hidden rounded-[2rem] border border-white/60 bg-white/55 p-2 shadow-float lg:hidden"
+                    class="project-media-video card-hover-soft curve-panel-b flex min-h-[13rem] overflow-hidden rounded-[2rem] border border-white/60 bg-white/55 p-0 shadow-float lg:hidden"
                   >
                     <video
                       :src="project.previewSrc"
@@ -298,3 +405,77 @@ const decorativeTrack =
     </div>
   </section>
 </template>
+
+<style scoped>
+/* ── Mobile editorial: story-scroll projects ── */
+@media (max-width: 639px) {
+  /* Each project = its own visual moment */
+  .project-story-card {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 1.1rem;
+    border-radius: 2.5rem 1.9rem 2.8rem 1.8rem / 2rem 2.8rem 2.1rem 3rem;
+    box-shadow: 0 24px 60px rgba(95, 74, 116, 0.14);
+  }
+
+  .project-story-card:nth-of-type(odd) {
+    transform: rotate(-1.2deg);
+  }
+
+  .project-story-card:nth-of-type(even) {
+    transform: rotate(1deg);
+    margin-left: 0.45rem;
+  }
+
+  /* Override grid → flex so we can reorder */
+  .project-inner-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  /* Image slides to the top */
+  .project-media-col {
+    order: -1;
+    margin: -0.1rem -0.2rem 0;
+  }
+
+  /* Taller, edge-to-edge video on mobile */
+  .project-media-video {
+    min-height: 24rem;
+    border-radius: 2rem;
+    box-shadow: 0 22px 48px rgba(76, 58, 88, 0.16);
+  }
+
+  .project-story-card h3 {
+    font-size: 2.5rem;
+    line-height: 0.94;
+  }
+
+  .project-story-card .curve-panel-c {
+    width: calc(100% - 0.5rem);
+    margin: -1.35rem auto 0;
+    border-radius: 1.85rem 1.4rem 1.95rem 1.55rem / 1.45rem 2rem 1.65rem 2.15rem;
+    backdrop-filter: blur(18px);
+  }
+
+  .project-story-card .mt-5.flex {
+    gap: 0.6rem;
+  }
+
+  .project-story-card .mt-5.flex > * {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .project-story-card .mt-6.flex {
+    gap: 0.45rem;
+  }
+
+  .project-story-card .mt-6.flex > * {
+    background: rgba(255, 255, 255, 0.62);
+  }
+}
+</style>

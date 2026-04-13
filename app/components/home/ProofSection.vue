@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import type { CodeProject, FriendReview } from '~/data/portfolio';
+import { computed } from 'vue';
 import FloatingAssetSlot from '~/components/shared/FloatingAssetSlot.vue';
 import MotionReveal from '~/components/shared/MotionReveal.vue';
+
+type RecentCommit = {
+  id: string;
+  repo: string;
+  repoLabel: string;
+  message: string;
+  sha: string;
+  createdAt: string;
+  url: string;
+};
 
 const props = defineProps<{
   codeProjects: CodeProject[];
@@ -68,6 +79,44 @@ const codeFragments = [
 ] as const;
 
 const githubProjects = props.codeProjects.slice(0, 3);
+
+const { data: githubFeed, error: githubFeedError } = await useAsyncData(
+  'github-activity',
+  () =>
+    $fetch<{
+      commits: RecentCommit[];
+      profileUrl: string;
+    }>('/api/github-activity'),
+  {
+    default: () => ({
+      commits: [],
+      profileUrl: 'https://github.com/KeMichelle',
+    }),
+  },
+);
+
+const recentCommits = computed(() => githubFeed.value?.commits ?? []);
+const githubProfileUrl = computed(
+  () => githubFeed.value?.profileUrl ?? 'https://github.com/KeMichelle',
+);
+
+function formatCommitTime(dateString: string) {
+  const timestamp = new Date(dateString).getTime();
+
+  if (Number.isNaN(timestamp)) return 'recently';
+
+  const diffInHours = Math.max(
+    1,
+    Math.round((Date.now() - timestamp) / 3600000),
+  );
+
+  if (diffInHours < 24) {
+    return `${diffInHours}h ago`;
+  }
+
+  const diffInDays = Math.round(diffInHours / 24);
+  return `${diffInDays}d ago`;
+}
 </script>
 
 <template>
@@ -122,7 +171,7 @@ const githubProjects = props.codeProjects.slice(0, 3);
 
         <div class="relative mx-auto max-w-[78rem] px-3 sm:px-4 lg:px-0">
           <div
-            class="relative overflow-visible rounded-[2.6rem] border border-white/65 bg-[linear-gradient(135deg,rgba(255,248,252,0.92),rgba(249,251,255,0.9))] p-4 shadow-[0_30px_90px_rgba(117,87,122,0.14)] backdrop-blur-xl sm:p-5 lg:p-6"
+            class="proof-window relative overflow-visible rounded-[2.6rem] border border-white/65 bg-[linear-gradient(135deg,rgba(255,248,252,0.92),rgba(249,251,255,0.9))] p-4 shadow-[0_30px_90px_rgba(117,87,122,0.14)] backdrop-blur-xl sm:p-5 lg:p-6"
           >
             <div
               class="flex items-center justify-between gap-3 rounded-[1.8rem] border border-white/65 bg-white/70 px-4 py-3 shadow-float"
@@ -141,7 +190,7 @@ const githubProjects = props.codeProjects.slice(0, 3);
             </div>
 
             <div
-              class="mt-4 grid gap-4 lg:grid-cols-[minmax(18rem,0.88fr)_minmax(0,1.12fr)] lg:items-start"
+              class="proof-stage mt-4 grid gap-4 lg:grid-cols-[minmax(18rem,0.88fr)_minmax(0,1.12fr)] lg:items-start"
             >
               <div class="space-y-4">
                 <div
@@ -242,13 +291,13 @@ const githubProjects = props.codeProjects.slice(0, 3);
                 </div>
 
                 <a
-                  href="https://github.com/KeMichelle"
+                  :href="githubProfileUrl"
                   target="_blank"
                   rel="noreferrer"
-                  class="group card-hover-soft tap-safe-press block transition duration-300 hover:scale-[1.02]"
+                  class="proof-github-link group card-hover-soft tap-safe-press block transition duration-300 hover:scale-[1.02]"
                 >
                   <div
-                    class="rounded-[2.8rem] border border-white/65 bg-[#d7d2cf] p-4 shadow-[0_28px_80px_rgba(74,59,88,0.2)] transition duration-300 group-hover:shadow-[0_34px_95px_rgba(74,59,88,0.28)]"
+                    class="proof-github-frame rounded-[2.8rem] border border-white/65 bg-[#d7d2cf] p-4 shadow-[0_28px_80px_rgba(74,59,88,0.2)] transition duration-300 group-hover:shadow-[0_34px_95px_rgba(74,59,88,0.28)]"
                   >
                     <div class="rounded-[2rem] bg-[#f7f2ef] p-4 sm:p-5">
                       <div
@@ -269,7 +318,7 @@ const githubProjects = props.codeProjects.slice(0, 3);
                         <span
                           class="rounded-full bg-[#efe7ff] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/58"
                         >
-                          open profile
+                          live feed
                         </span>
                       </div>
 
@@ -284,15 +333,57 @@ const githubProjects = props.codeProjects.slice(0, 3);
 
                         <div class="mt-4 space-y-3">
                           <div
-                            v-for="project in githubProjects"
-                            :key="project.title"
-                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/86"
+                            v-for="commit in recentCommits"
+                            :key="commit.id"
+                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/86 transition duration-300 hover:border-white/20 hover:bg-white/10"
+                          >
+                            <div
+                              class="flex items-center justify-between gap-3"
+                            >
+                              <p
+                                class="text-sm font-semibold tracking-[0.02em]"
+                              >
+                                {{ commit.repoLabel }}
+                              </p>
+                              <span
+                                class="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45"
+                              >
+                                {{ formatCommitTime(commit.createdAt) }}
+                              </span>
+                            </div>
+                            <p class="mt-2 text-xs leading-6 text-white/78">
+                              {{ commit.message }}
+                            </p>
+                            <div
+                              class="mt-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.18em] text-white/45"
+                            >
+                              <span>#{{ commit.sha }}</span>
+                              <span>recent commit</span>
+                            </div>
+                          </div>
+
+                          <div
+                            v-if="!recentCommits.length && !githubFeedError"
+                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/70"
                           >
                             <p class="text-sm font-semibold tracking-[0.02em]">
-                              {{ project.title }}
+                              Loading recent commits
                             </p>
-                            <p class="mt-2 text-xs leading-6 text-white/60">
-                              {{ project.description }}
+                            <p class="mt-2 text-xs leading-6 text-white/50">
+                              Pulling the latest public GitHub activity.
+                            </p>
+                          </div>
+
+                          <div
+                            v-if="githubFeedError"
+                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/70"
+                          >
+                            <p class="text-sm font-semibold tracking-[0.02em]">
+                              GitHub feed unavailable
+                            </p>
+                            <p class="mt-2 text-xs leading-6 text-white/50">
+                              Open the profile to see the latest public
+                              activity.
                             </p>
                           </div>
                         </div>
@@ -446,6 +537,54 @@ const githubProjects = props.codeProjects.slice(0, 3);
   50%,
   100% {
     border-color: transparent;
+  }
+}
+
+@media (max-width: 639px) {
+  .proof-window {
+    border-radius: 2.8rem 2.1rem 3rem 1.9rem / 2.1rem 3rem 2.15rem 2.8rem;
+    padding: 0.95rem;
+    transform: rotate(-0.7deg);
+  }
+
+  .proof-window::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        circle at 12% 18%,
+        rgba(255, 231, 144, 0.32),
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 86% 72%,
+        rgba(217, 206, 255, 0.28),
+        transparent 28%
+      );
+    pointer-events: none;
+  }
+
+  .proof-stage {
+    gap: 0.9rem;
+  }
+
+  .proof-stage > div:first-child {
+    transform: rotate(1.2deg);
+  }
+
+  .proof-stage > div:last-child {
+    transform: rotate(-1deg);
+  }
+
+  .proof-github-link {
+    margin-top: -0.3rem;
+  }
+
+  .proof-github-frame {
+    border-radius: 2.3rem 1.8rem 2.5rem 1.8rem / 1.9rem 2.5rem 2rem 2.6rem;
+    box-shadow: 0 24px 64px rgba(74, 59, 88, 0.18);
   }
 }
 </style>

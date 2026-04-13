@@ -26,17 +26,11 @@ const activeBoard = ref<'mine' | 'client' | 'review'>('mine');
 // parallax is written directly as CSS custom properties on sectionRef
 // so mouse moves NEVER trigger Vue re-renders
 
-const servicePoints = [
-  'rework what you already own',
-  'build complete outfits from your wardrobe',
-  'make your style feel more intentional',
-] as const;
-
-const deliverables = [
-  'wardrobe review',
-  'outfit combinations',
-  'moodboard direction',
-  'written styling notes',
+const designInfluences = [
+  'editorial composition',
+  'visual balance',
+  'layout instinct',
+  'image direction',
 ] as const;
 
 type ClothingPiece = {
@@ -752,19 +746,19 @@ onBeforeUnmount(() => {
           <span
             class="inline-flex -rotate-[4deg] rounded-full bg-[#ff8ec3] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-white shadow-float"
           >
-            Personal styling
+            Creative direction
           </span>
           <h2
             class="mt-5 font-display text-[3rem] font-semibold leading-[0.9] text-ink sm:text-[4rem] lg:text-[5rem]"
           >
-            Wardrobe rework, but beautifully done.
+            Creative direction &amp; styling
           </h2>
           <p
             class="mt-4 max-w-[34rem] text-sm leading-7 text-ink/74 sm:text-base lg:text-lg"
           >
-            I help rework wardrobes and build complete outfits from the pieces
-            you already own, so your style feels clearer, more polished, and
-            more like you.
+            Beyond web design, I explore styling and visual composition. This
+            influences how I approach layout, balance, and storytelling in
+            digital work.
           </p>
         </MotionReveal>
 
@@ -779,26 +773,21 @@ onBeforeUnmount(() => {
                 <p
                   class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/46"
                 >
-                  what I offer
+                  how it informs the work
                 </p>
                 <p
                   class="mt-3 font-display text-[1.55rem] leading-[1.04] text-ink sm:text-[1.9rem]"
                 >
-                  Reworking wardrobes into real outfits you can actually wear.
+                  Styling as a design language.
                 </p>
                 <p class="mt-4 text-sm leading-7 text-ink/66">
-                  This is not random shopping advice. It is about looking
-                  properly at your wardrobe, editing it, and building
-                  combinations that feel intentional.
+                  My editorial eye — for silhouette, proportion, and tone — is
+                  the same lens I bring to layout, hierarchy, and visual rhythm
+                  in digital work.
                 </p>
-                <ul class="mt-4 space-y-2 text-sm leading-6 text-ink/68">
-                  <li v-for="point in servicePoints" :key="point">
-                    {{ point }}
-                  </li>
-                </ul>
                 <div class="mt-5 flex flex-wrap gap-2">
                   <span
-                    v-for="item in deliverables"
+                    v-for="item in designInfluences"
                     :key="item"
                     class="rounded-full bg-[#fff4ae] px-3 py-1.5 text-[11px] font-semibold text-ink shadow-float"
                   >
@@ -1015,13 +1004,12 @@ onBeforeUnmount(() => {
                     </div>
                   </Transition>
 
-                  <div
-                    class="group card-hover-soft rotate-[-1deg] overflow-hidden rounded-[2rem] border border-white/60 bg-gradient-to-br from-[#fff0f6] via-white to-[#eef7ff] p-5 shadow-dreamy backdrop-blur-xl transition duration-300 hover:shadow-[0_24px_60px_rgba(106,82,153,0.18)] sm:rotate-[-2deg]"
-                  >
+                  <!-- future presentation and work-with-me removed: section is now creative direction taste proof -->
+                  <div class="hidden-sr-only" style="display: none">
                     <p
                       class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/46"
                     >
-                      future presentation
+                      future presentation (hidden)
                     </p>
                     <p
                       class="mt-3 font-display text-[1.45rem] leading-[1.04] text-ink sm:text-[1.75rem]"
@@ -1075,7 +1063,7 @@ onBeforeUnmount(() => {
                   </div>
 
                   <div
-                    class="card-hover-lilt rounded-[1.9rem] border border-white/60 bg-gradient-to-br from-white via-[#fff7da] to-[#ffe9f5] p-5 shadow-float backdrop-blur-xl"
+                    class="card-hover-lilt hidden rounded-[1.9rem] border border-white/60 bg-gradient-to-br from-white via-[#fff7da] to-[#ffe9f5] p-5 shadow-float backdrop-blur-xl"
                   >
                     <p
                       class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/46"

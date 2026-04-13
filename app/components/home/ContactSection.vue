@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ContactLink } from '~/data/portfolio';
-import DecorSlot from '~/components/shared/DecorSlot.vue';
 import MotionReveal from '~/components/shared/MotionReveal.vue';
 import StickerChip from '~/components/shared/StickerChip.vue';
 
@@ -18,18 +17,22 @@ function getContactActionLabel(href: string) {
 
 function getContactCardClasses(label: string) {
   if (label === 'LinkedIn') {
-    return 'rotate-[-2deg] border-white/75 bg-gradient-to-br from-white via-[#ffe9f4] to-[#fff6d9] text-ink hover:-translate-y-1.5 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(255,122,183,0.18)]';
+    return 'rotate-[-2deg] border-white/75 bg-gradient-to-br from-white via-[#ffe9f4] to-[#fff6d9] text-ink hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(255,122,183,0.18)]';
   }
 
   if (label === 'GitHub') {
-    return 'rotate-[1.5deg] border-white/75 bg-gradient-to-br from-white via-[#eef5ff] to-[#e8fff4] text-ink hover:-translate-y-1.5 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(120,150,255,0.18)]';
+    return 'rotate-[1.5deg] border-white/75 bg-gradient-to-br from-white via-[#eef5ff] to-[#e8fff4] text-ink hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(120,150,255,0.18)]';
   }
 
   if (label === 'Email') {
-    return 'rotate-[-1deg] border-white/75 bg-gradient-to-br from-white via-[#fff0da] to-[#ffe8f3] text-ink hover:-translate-y-1.5 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(255,196,92,0.2)]';
+    return 'rotate-[-1deg] border-white/75 bg-gradient-to-br from-white via-[#fff0da] to-[#ffe8f3] text-ink hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(255,196,92,0.2)]';
   }
 
-  return 'rotate-[2deg] border-white/75 bg-gradient-to-br from-white via-[#f7ecff] to-[#eaf7ff] text-ink hover:-translate-y-1.5 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(157,125,205,0.18)]';
+  if (label === 'Instagram') {
+    return 'rotate-[1deg] border-white/75 bg-gradient-to-br from-white via-[#fce8ff] to-[#ffe0f5] text-ink hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(220,130,200,0.2)]';
+  }
+
+  return 'rotate-[2deg] border-white/75 bg-gradient-to-br from-white via-[#f7ecff] to-[#eaf7ff] text-ink hover:-translate-y-1 hover:rotate-0 hover:shadow-[0_24px_50px_rgba(157,125,205,0.18)]';
 }
 </script>
 
@@ -79,15 +82,18 @@ function getContactCardClasses(label: string) {
           <h2
             class="mt-5 max-w-3xl font-display text-5xl font-semibold leading-[0.92] text-balance sm:text-6xl lg:text-7xl"
           >
-            Send me a note if you want something thoughtful, soft, and well
-            made.
+            If you're looking for a website that feels thoughtful, clear, and
+            visually refined, I'd love to hear from you.
           </h2>
 
           <p class="mt-5 max-w-2xl text-base leading-8 text-ink/72 sm:text-lg">
-            I am open to thoughtful product work, creative websites, and
-            collaborations that want both technical clarity and a softer visual
-            point of view. London-based, but always carrying a little Italian
-            warmth into the work.
+            I'm open to creative websites, product and front-end work, and
+            freelance projects and collaborations.
+          </p>
+
+          <p class="mt-4 max-w-2xl text-base leading-8 text-ink/60 sm:text-lg">
+            Based in London, working with clients everywhere, always bringing a
+            soft, considered approach to both design and development.
           </p>
 
           <div class="mt-6 flex flex-wrap gap-3">
@@ -111,12 +117,12 @@ function getContactCardClasses(label: string) {
               :target="isExternalLink(link.href) ? '_blank' : undefined"
               :rel="isExternalLink(link.href) ? 'noreferrer' : undefined"
               :class="[
-                'group card-hover-lilt card-wiggle rounded-[1.75rem] border p-4 shadow-float backdrop-blur-sm transition duration-500',
+                'group card-hover-lilt rounded-[1.75rem] border p-4 shadow-float backdrop-blur-sm transition duration-500',
                 getContactCardClasses(link.label),
               ]"
             >
               <div class="flex items-center justify-between gap-4">
-                <p class="font-display text-3xl font-semibold">
+                <p class="contact-label font-display text-3xl font-semibold">
                   {{ link.label }}
                 </p>
                 <span
@@ -129,55 +135,126 @@ function getContactCardClasses(label: string) {
               </p>
             </a>
           </div>
-
-          <div class="mt-5">
-            <DecorSlot
-              label="final illustration / sticker cluster"
-              accent="pink"
-            />
-          </div>
         </div>
       </div>
     </MotionReveal>
+
+    <!-- Hidden gem — for the curious ones -->
+    <div class="mt-8 flex justify-center">
+      <NuxtLink
+        to="/playground"
+        class="playground-link group inline-flex items-center gap-1.5 text-[11px] font-medium uppercase tracking-[0.22em] transition duration-300"
+      >
+        <span class="transition duration-300 group-hover:rotate-12 inline-block"
+          >✦</span
+        >
+        Playground
+      </NuxtLink>
+    </div>
   </section>
 </template>
 
 <style scoped>
-/* Wiggle-bounce on hover for contact cards */
-@keyframes cardWiggle {
+/* ── Card label: underline-reveal on hover ── */
+.contact-label {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-label::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.3;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition:
+    transform 380ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 280ms ease;
+}
+
+.group:hover .contact-label::after {
+  transform: scaleX(1);
+  opacity: 0.5;
+}
+
+/* Rainbow hidden gem link */
+@keyframes rainbowText {
   0% {
-    transform: rotate(0deg) translateY(0);
+    color: #ff6b9d;
   }
-  18% {
-    transform: rotate(-4deg) translateY(-4px);
+  14% {
+    color: #ff9f43;
   }
-  36% {
-    transform: rotate(4deg) translateY(-6px);
+  28% {
+    color: #ffd32a;
   }
-  52% {
-    transform: rotate(-2deg) translateY(-3px);
+  42% {
+    color: #26de81;
   }
-  68% {
-    transform: rotate(1.5deg) translateY(-1px);
+  57% {
+    color: #45aaf2;
   }
-  84% {
-    transform: rotate(-0.5deg) translateY(0);
+  71% {
+    color: #a55eea;
+  }
+  85% {
+    color: #fd79a8;
   }
   100% {
-    transform: rotate(0deg) translateY(0);
+    color: #ff6b9d;
   }
 }
 
-/* This overrides the rotate set by getContactCardClasses during hover */
-.card-wiggle:hover {
-  animation: cardWiggle 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
-  /* Let the animation handle the transform, disable the Tailwind translate */
-  transform: none !important;
+.playground-link {
+  animation: rainbowText 4s linear infinite;
+  opacity: 0.45;
+}
+
+.playground-link:hover {
+  opacity: 1;
+  animation-duration: 1.2s;
+}
+
+@media (max-width: 639px) {
+  .curve-panel-c {
+    border-radius: 2.8rem 2.1rem 3rem 2rem / 2rem 3rem 2.3rem 2.8rem;
+    padding-top: 4.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .curve-panel-c > .relative {
+    gap: 1rem;
+  }
+
+  .curve-panel-c > .relative > div:last-child {
+    margin-top: -0.8rem;
+    transform: rotate(-1.6deg);
+  }
+
+  .curve-panel-c a.group:nth-child(odd) {
+    transform: rotate(-1.25deg);
+  }
+
+  .curve-panel-c a.group:nth-child(even) {
+    transform: rotate(1deg);
+  }
+
+  .playground-link {
+    opacity: 0.7;
+    letter-spacing: 0.24em;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card-wiggle:hover {
+  .playground-link {
     animation: none;
+    color: inherit;
+    opacity: 0.36;
   }
 }
 </style>

@@ -3,7 +3,6 @@ import { type Ref, onBeforeUnmount, onMounted, ref } from 'vue';
 import {
   codeProjects,
   contactLinks,
-  creativeProjects,
   friendReviews,
   servicePillars,
   webProjects,
@@ -12,7 +11,7 @@ import AboutSection from '~/components/home/AboutSection.vue';
 import ContactSection from '~/components/home/ContactSection.vue';
 import HeroSection from '~/components/home/HeroSection.vue';
 import ProofSection from '~/components/home/ProofSection.vue';
-import StylingSection from '~/components/home/StylingSection.vue';
+import SkillsSection from '~/components/home/SkillsSection.vue';
 import WebProjectsSection from '~/components/home/WebProjectsSection.vue';
 
 useSeoMeta({
@@ -103,7 +102,7 @@ onBeforeUnmount(() => scrollRevealObs?.disconnect());
       data-cursor="styling"
       :class="['section-scroll-reveal', sec3Vis && 'is-visible']"
     >
-      <StylingSection :projects="creativeProjects" />
+      <SkillsSection />
     </div>
 
     <div
@@ -191,6 +190,35 @@ onBeforeUnmount(() => scrollRevealObs?.disconnect());
     opacity: 1;
     transform: none;
     animation: none;
+  }
+
+  .scroll-layer:not(:first-child) {
+    margin-top: 0;
+    padding-top: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+}
+
+@media (max-width: 639px) {
+  .scroll-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    scroll-snap-type: y proximity;
+    padding-bottom: 1.25rem;
+  }
+
+  .scroll-layer {
+    min-height: 100svh;
+    display: flex;
+    align-items: stretch;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .scroll-layer > * {
+    flex: 1;
   }
 
   .scroll-layer:not(:first-child) {

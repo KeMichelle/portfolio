@@ -1,26 +1,17 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import FloatingAssetSlot from '~/components/shared/FloatingAssetSlot.vue';
 import MotionReveal from '~/components/shared/MotionReveal.vue';
-
-const activeMode = ref<'developer' | 'styling'>('developer');
 
 const workList = [
   'clear structure',
   'soft interactions',
-  'real product thinking',
+  'thoughtful design choices',
 ] as const;
 
 const personalNotes = [
-  'I notice small details a lot.',
-  'I do not like cold interfaces.',
-  'I like mixing code and styling.',
-] as const;
-
-const profileFacts = [
-  'based in London',
-  'originally from Italy',
-  'frontend + visual eye',
+  'I pay attention to small details.',
+  "I don't like cold interfaces.",
+  'I like when design feels considered, calm, and human.',
 ] as const;
 
 const workWithMeNotes = [
@@ -28,19 +19,6 @@ const workWithMeNotes = [
   'freelance work',
   'creative projects',
 ] as const;
-
-const modeContent = {
-  developer: {
-    title: 'developer side',
-    text: 'Most of my day-to-day is coding with Vue, Nuxt, React, and TypeScript, but I always want the result to feel calm, clear, and human.',
-    accent: 'bg-gradient-to-br from-[#e7e4ff] via-[#eef5ff] to-[#ddeeff]',
-  },
-  styling: {
-    title: 'styling side',
-    text: 'I also love fashion, cutouts, moodboards, and visual storytelling, so this portfolio is really both sides of me living together.',
-    accent: 'bg-gradient-to-br from-[#ffe0ef] via-[#fff5fa] to-[#fff0c9]',
-  },
-} as const;
 </script>
 
 <template>
@@ -50,13 +28,16 @@ const modeContent = {
   >
     <div class="section-bleed relative overflow-x-clip overflow-y-visible">
       <div
-        class="ambient-blob absolute left-[4%] top-[4%] h-40 w-40 rounded-full bg-[#ffe7a6]/50 blur-3xl"
+        class="ambient-blob absolute left-[4%] top-[4%] h-56 w-56 rounded-full bg-[#ffe7a6]/60 blur-3xl"
       />
       <div
-        class="ambient-blob ambient-blob-reverse absolute right-[7%] top-[14%] h-48 w-48 rounded-full bg-[#ffd4ea]/50 blur-3xl"
+        class="ambient-blob ambient-blob-reverse absolute right-[7%] top-[14%] h-64 w-64 rounded-full bg-[#ffd4ea]/60 blur-3xl"
       />
       <div
-        class="ambient-blob ambient-blob-slow absolute left-[18%] bottom-[10%] h-44 w-44 rounded-full bg-[#dff7ef]/45 blur-3xl"
+        class="ambient-blob ambient-blob-slow absolute left-[18%] bottom-[10%] h-56 w-56 rounded-full bg-[#c7f5e4]/55 blur-3xl"
+      />
+      <div
+        class="ambient-blob absolute right-[22%] bottom-[18%] h-48 w-48 rounded-full bg-[#dcd8ff]/55 blur-3xl"
       />
 
       <MotionReveal
@@ -76,11 +57,59 @@ const modeContent = {
           aria-hidden="true"
           class="absolute bottom-[10%] right-[8%] hidden w-20 -rotate-[6deg] object-contain opacity-80 lg:block"
         />
+        <!-- Mobile-only stickers -->
+        <div
+          class="pointer-events-none absolute right-4 top-4 z-10 block lg:hidden"
+        >
+          <img
+            src="/purple_stars.gif"
+            alt=""
+            aria-hidden="true"
+            class="w-10 -rotate-[6deg] object-contain opacity-90"
+          />
+        </div>
+        <div
+          class="pointer-events-none absolute left-4 bottom-6 z-10 block lg:hidden"
+        >
+          <img
+            src="/yellow_sparkle_1.gif"
+            alt=""
+            aria-hidden="true"
+            class="w-8 rotate-[10deg] object-contain opacity-85"
+          />
+        </div>
 
         <div
           class="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(19rem,0.95fr)] lg:gap-10 xl:gap-14"
         >
           <div class="relative">
+            <!-- Mobile-only: gentle polaroid portrait -->
+            <MotionReveal
+              class="mb-7 flex justify-center sm:hidden"
+              :delay="50"
+              direction="none"
+              :once="true"
+            >
+              <div class="relative rotate-[-2deg]">
+                <div
+                  class="relative w-[8.5rem] overflow-hidden rounded-[1.75rem] border border-white/80 bg-white px-2.5 pb-3 pt-2.5 shadow-dreamy"
+                >
+                  <div
+                    class="aspect-[4/5] overflow-hidden rounded-[1.3rem] border border-[#f2d9e7]/80 bg-[#fff5fb]"
+                  >
+                    <img
+                      src="/cutout_michelle_phone_selfie.png"
+                      alt="Michelle"
+                      class="h-full w-full scale-[1.35] object-cover object-top"
+                    />
+                  </div>
+                  <p class="mt-2 text-center font-display text-sm text-ink/70">
+                    Michelle
+                  </p>
+                </div>
+              </div>
+            </MotionReveal>
+
             <span
               class="inline-flex -rotate-[4deg] rounded-full bg-[#8ce7c0] px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-ink shadow-float"
             >
@@ -96,146 +125,158 @@ const modeContent = {
               <p
                 class="mt-5 max-w-[39rem] text-base leading-8 text-ink/76 sm:text-lg"
               >
-                I’m a front-end developer based in London, originally from
-                Italy.
+                I'm a designer and front-end developer based in London,
+                originally from Italy.
               </p>
               <p
                 class="mt-4 max-w-[38rem] text-base leading-8 text-ink/72 sm:text-lg"
               >
-                I love building things that feel clear, soft, and actually nice
-                to use.
+                I create websites that feel clear, soft, and genuinely nice to
+                use — balancing structure with a strong visual eye.
               </p>
             </div>
 
             <div class="mt-6 flex max-w-[42rem] flex-wrap gap-3">
               <span
-                v-for="fact in profileFacts"
-                :key="fact"
-                class="rounded-full border border-white/65 bg-white/82 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/60 shadow-float backdrop-blur-sm"
+                class="rounded-full border border-white/65 bg-[#ffd8ec] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                >based in London</span
               >
-                {{ fact }}
-              </span>
+              <span
+                class="rounded-full border border-white/65 bg-[#c7f5e4] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                >originally from Italy</span
+              >
+              <span
+                class="rounded-full border border-white/65 bg-[#dcd8ff] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                >designer &amp; developer</span
+              >
             </div>
 
-            <div
+            <MotionReveal
               class="mt-8 grid gap-4 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]"
+              :delay="310"
+              direction="up"
+              :once="true"
             >
               <div
-                class="card-hover-soft curve-panel-a rounded-[2rem] border border-white/65 bg-white/84 p-5 shadow-float backdrop-blur-xl"
+                class="card-hover-soft curve-panel-a rounded-[2rem] border border-white/65 bg-gradient-to-br from-[#fff3c4] via-white to-[#d6fef0] p-5 shadow-float backdrop-blur-xl"
               >
                 <p
-                  class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/48"
+                  class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/55"
                 >
-                  little pieces of me
+                  how I think
                 </p>
                 <ul class="mt-4 space-y-3 text-sm leading-7 text-ink/70">
-                  <li v-for="item in personalNotes" :key="item">{{ item }}</li>
+                  <li class="flex items-start gap-2">
+                    <span
+                      class="mt-[0.35rem] h-2 w-2 flex-none rounded-full bg-[#ff8ec3]"
+                    ></span>
+                    I pay attention to small details.
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span
+                      class="mt-[0.35rem] h-2 w-2 flex-none rounded-full bg-[#ffd32a]"
+                    ></span>
+                    I don't like cold interfaces.
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <span
+                      class="mt-[0.35rem] h-2 w-2 flex-none rounded-full bg-[#45aaf2]"
+                    ></span>
+                    I like when design feels considered, calm, and human.
+                  </li>
                 </ul>
               </div>
 
               <div
-                class="card-hover-soft curve-panel-c rounded-[2rem] border border-white/65 bg-gradient-to-br from-[#fff8fd] via-white to-[#eef8ff] p-5 shadow-float backdrop-blur-xl"
+                class="card-hover-soft curve-panel-c rounded-[2rem] border border-white/65 bg-gradient-to-br from-[#ede8ff] via-white to-[#d5eeff] p-5 shadow-float backdrop-blur-xl"
               >
                 <p
-                  class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/48"
+                  class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/55"
                 >
-                  switch the mood
+                  my approach
+                </p>
+                <p class="mt-4 text-sm leading-7 text-ink/70">
+                  Most of my day-to-day is Vue, Nuxt, React, and TypeScript —
+                  real products, dashboards, and structured apps.
+                </p>
+                <p class="mt-3 text-sm leading-7 text-ink/70">
+                  Alongside code, I'm naturally drawn to styling and visual
+                  composition — which shapes how I think about layout, spacing,
+                  and storytelling.
                 </p>
                 <div class="mt-4 flex flex-wrap gap-2">
-                  <button
-                    type="button"
-                    @click="activeMode = 'developer'"
-                    :class="[
-                      'rounded-full px-3 py-2 text-xs font-semibold shadow-float transition duration-300',
-                      activeMode === 'developer'
-                        ? 'bg-[#dcd8ff] text-ink'
-                        : 'bg-white text-ink/70',
-                    ]"
-                  >
-                    developer
-                  </button>
-                  <button
-                    type="button"
-                    @click="activeMode = 'styling'"
-                    :class="[
-                      'rounded-full px-3 py-2 text-xs font-semibold shadow-float transition duration-300',
-                      activeMode === 'styling'
-                        ? 'bg-[#ffb6da] text-ink'
-                        : 'bg-white text-ink/70',
-                    ]"
-                  >
-                    styling
-                  </button>
-                </div>
-                <Transition name="about-mode" mode="out-in">
-                  <div
-                    :key="activeMode"
-                    :class="[
-                      'mt-4 rounded-[1.4rem] p-4',
-                      modeContent[activeMode].accent,
-                    ]"
-                  >
-                    <p
-                      class="text-xs font-semibold uppercase tracking-[0.2em] text-ink/50"
-                    >
-                      {{ modeContent[activeMode].title }}
-                    </p>
-                    <p class="mt-2 text-sm leading-6 text-ink/70">
-                      {{ modeContent[activeMode].text }}
-                    </p>
-                  </div>
-                </Transition>
-                <div class="mt-4 flex flex-wrap gap-2">
                   <span
-                    v-for="item in workList"
-                    :key="item"
-                    class="rounded-full bg-white/82 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/60 shadow-float"
+                    class="rounded-full bg-[#ffd8ec] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
                   >
-                    {{ item }}
+                    clear structure
+                  </span>
+                  <span
+                    class="rounded-full bg-[#c7f5e4] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                  >
+                    soft interactions
+                  </span>
+                  <span
+                    class="rounded-full bg-[#dcd8ff] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                  >
+                    thoughtful design
                   </span>
                 </div>
               </div>
-            </div>
+            </MotionReveal>
 
-            <div
-              class="card-hover-lilt mt-4 rounded-[2rem] border border-white/65 bg-gradient-to-br from-white via-[#fff7d8] to-[#ffe8f4] p-5 shadow-float backdrop-blur-xl"
-            >
-              <p
-                class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/48"
+            <MotionReveal :delay="440" direction="up" :once="true">
+              <div
+                class="card-hover-lilt mt-4 rounded-[2rem] border border-white/65 bg-gradient-to-br from-[#fff4a3] via-[#ffeaf5] to-[#ffe0f8] p-5 shadow-float backdrop-blur-xl"
               >
-                short story
-              </p>
-              <p
-                class="mt-4 max-w-[42rem] text-sm leading-7 text-ink/70 sm:text-base"
-              >
-                I moved from Italy to London and now work as a Software
-                Engineer, mostly on real products, dashboards, structured apps,
-                and things people actually use.
-              </p>
-              <div class="mt-4 flex flex-wrap gap-2">
-                <span
-                  v-for="item in workWithMeNotes"
-                  :key="item"
-                  class="rounded-full bg-white/80 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink/58 shadow-float"
+                <p
+                  class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/55"
                 >
-                  {{ item }}
-                </span>
+                  if this resonates
+                </p>
+                <p
+                  class="mt-4 max-w-[42rem] text-sm leading-7 text-ink/70 sm:text-base"
+                >
+                  I like things that feel a bit sunlit, a bit soft, and never
+                  too corporate.
+                </p>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  <span
+                    class="rounded-full bg-[#ffd8ec] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                  >
+                    front-end roles
+                  </span>
+                  <span
+                    class="rounded-full bg-[#fff4ae] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                  >
+                    freelance work
+                  </span>
+                  <span
+                    class="rounded-full bg-[#c7f5e4] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-ink shadow-float"
+                  >
+                    creative projects
+                  </span>
+                </div>
+                <a
+                  href="#contact"
+                  class="mt-5 inline-flex max-w-full rounded-[1.4rem] bg-[#ff7ab7] px-4 py-3 text-sm font-semibold leading-6 text-white shadow-dreamy transition duration-300 hover:bg-[#ff62aa]"
+                >
+                  <span class="max-w-[20rem] whitespace-normal text-left">
+                    If this resonates with you, you'll probably enjoy working
+                    together.
+                  </span>
+                </a>
               </div>
-              <a
-                href="#contact"
-                class="mt-5 inline-flex max-w-full rounded-[1.4rem] bg-[#ff7ab7] px-4 py-3 text-sm font-semibold leading-6 text-white shadow-dreamy transition duration-300 hover:bg-[#ff62aa]"
-              >
-                <span class="max-w-[20rem] whitespace-normal text-left">
-                  If you like this kind of work, you’ll probably like working
-                  with me too.
-                </span>
-              </a>
-            </div>
+            </MotionReveal>
           </div>
 
-          <div class="relative min-h-[38rem] sm:min-h-[40rem] lg:min-h-[44rem]">
+          <MotionReveal
+            class="relative hidden min-h-[38rem] sm:block sm:min-h-[40rem] lg:min-h-[44rem]"
+            :delay="180"
+            direction="right"
+            :once="true"
+          >
             <div
-              class="curve-panel-a absolute inset-x-[4%] top-[2%] bottom-[8%] border border-white/60 bg-gradient-to-br from-[#fff9fd]/88 via-white/78 to-[#fff6dc]/80 shadow-dreamy backdrop-blur-xl"
+              class="curve-panel-a absolute inset-x-[4%] top-[2%] bottom-[8%] border border-white/60 bg-gradient-to-br from-[#ffeef8]/90 via-white/80 to-[#eef5ff]/85 shadow-dreamy backdrop-blur-xl"
             />
 
             <div class="absolute right-[4%] top-[4%] z-20 hidden sm:block">
@@ -357,7 +398,7 @@ const modeContent = {
               aria-hidden="true"
               class="absolute left-[8%] top-[32%] z-20 w-11 -rotate-[14deg] object-contain opacity-90"
             />
-          </div>
+          </MotionReveal>
         </div>
       </MotionReveal>
     </div>
@@ -376,5 +417,53 @@ const modeContent = {
 .about-mode-leave-to {
   opacity: 0;
   transform: translateY(14px) scale(0.98);
+}
+
+@media (max-width: 639px) {
+  .paper-layer {
+    border-radius: 2.6rem 2rem 3rem 2rem / 2rem 3rem 2.2rem 2.8rem;
+    padding-top: 4.6rem;
+    overflow: hidden;
+  }
+
+  .paper-layer::after {
+    content: '';
+    position: absolute;
+    inset: -8% auto auto -10%;
+    width: 11rem;
+    height: 11rem;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 233, 163, 0.58),
+      transparent 72%
+    );
+    filter: blur(14px);
+    pointer-events: none;
+  }
+
+  .paper-layer > .relative {
+    gap: 1.25rem;
+  }
+
+  .paper-layer h2 {
+    max-width: 8ch;
+    font-size: 3.5rem;
+    line-height: 0.9;
+  }
+
+  .paper-layer .card-hover-soft,
+  .paper-layer .card-hover-lilt {
+    border-radius: 2rem 1.5rem 2.2rem 1.6rem / 1.45rem 2.2rem 1.7rem 2.25rem;
+  }
+
+  .paper-layer .card-hover-soft:nth-of-type(1) {
+    transform: rotate(-1.6deg);
+  }
+
+  .paper-layer .card-hover-soft:nth-of-type(2),
+  .paper-layer .card-hover-lilt {
+    transform: rotate(1.3deg);
+  }
 }
 </style>

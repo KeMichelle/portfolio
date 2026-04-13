@@ -36,7 +36,7 @@ onMounted(() => {
     return;
   }
 
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (globalThis.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     visible.value = true;
     return;
   }
@@ -109,5 +109,36 @@ onBeforeUnmount(() => {
 .reveal-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
+}
+
+/* ── Mobile editorial: blur-in + vertical-only reveals ── */
+@media (max-width: 639px) {
+  /* Convert sideways slides to gentle upward drift on mobile */
+  .reveal-left,
+  .reveal-right {
+    transform: translate3d(0, 20px, 0) scale(0.97);
+  }
+
+  .reveal-up {
+    transform: translate3d(0, 24px, 0) scale(0.965);
+  }
+
+  .reveal-none {
+    transform: scale(0.94);
+  }
+
+  /* Add soft blur that clears as element enters */
+  .reveal-base {
+    filter: blur(8px) saturate(0.96);
+    transform-origin: center bottom;
+    transition:
+      opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 860ms cubic-bezier(0.16, 0.84, 0.32, 1),
+      filter 760ms ease;
+  }
+
+  .reveal-visible {
+    filter: blur(0px) saturate(1);
+  }
 }
 </style>

@@ -372,6 +372,10 @@
     transform: translate3d(0, -50%, 0) scale(1) rotate(0deg);
   }
 
+  html.custom-cursor-active .project-preview-blob {
+    display: none;
+  }
+
   .project-preview-media {
     border-radius: 62% 38% 44% 56% / 48% 31% 69% 52%;
     overflow: hidden;
@@ -450,28 +454,66 @@
         rgba(255, 226, 237, 0.18),
         rgba(228, 243, 236, 0.15)
       );
+    background-attachment: fixed;
+  }
+
+  body::before,
+  body::after {
+    content: '';
+    position: fixed;
+    inset: auto;
+    pointer-events: none;
+    z-index: 0;
+    border-radius: 999px;
+    filter: blur(52px);
+    opacity: 0.68;
+  }
+
+  body::before {
+    left: -3.5rem;
+    top: 18vh;
+    width: 10rem;
+    height: 10rem;
+    background: rgba(255, 214, 232, 0.48);
+  }
+
+  body::after {
+    right: -3rem;
+    bottom: 12vh;
+    width: 11rem;
+    height: 11rem;
+    background: rgba(214, 236, 255, 0.42);
   }
 
   .section-shell {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: 0.875rem;
+    padding-right: 0.875rem;
+    padding-top: 1.15rem;
+    padding-bottom: 1.15rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-shell + .section-shell {
+    margin-top: -0.6rem;
   }
 
   .section-bleed {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
+    position: relative;
   }
 
   .curve-panel-a,
   .curve-panel-b,
   .curve-panel-c {
-    border-radius: 2rem;
+    border-radius: 2.6rem 2rem 2.9rem 1.9rem / 2.1rem 2.8rem 2.2rem 3rem;
   }
 
   .paper-layer::before,
   .mesh-glow {
-    opacity: 0.72;
+    opacity: 0.8;
   }
 
   .shadow-dreamy {
@@ -480,6 +522,15 @@
 
   .shadow-float {
     box-shadow: 0 12px 28px rgba(95, 74, 116, 0.1) !important;
+  }
+
+  .glass-panel {
+    border-radius: 1.5rem;
+  }
+
+  .organic-card,
+  .glass-panel {
+    backdrop-filter: blur(20px);
   }
 
   .card-hover-soft:hover,
@@ -493,6 +544,42 @@
 
   .tap-safe-press:active {
     transform: scale(0.985);
+  }
+
+  .ambient-blob {
+    animation: ambientBlob 20s ease-in-out infinite;
+    opacity: 0.62;
+  }
+
+  .animate-drift {
+    animation: doodleDrift 11s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: doodleBob 12.5s ease-in-out infinite;
+  }
+
+  /* ── Editorial mobile: spacing + typography ── */
+
+  /* Bigger display headings on mobile for editorial impact */
+  .font-display {
+    letter-spacing: -0.01em;
+  }
+
+  /* Softer section card backgrounds on mobile */
+  .section-bleed.curve-panel-b,
+  .section-bleed.curve-panel-c {
+    border-radius: 2.5rem;
+  }
+
+  .section-shell > .section-bleed,
+  .section-shell > .glass-panel,
+  .section-shell > .paper-layer {
+    position: relative;
+  }
+
+  .float-orbit {
+    opacity: 0.78;
   }
 }
 

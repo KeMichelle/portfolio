@@ -105,23 +105,45 @@ useTilt(portraitRef, 7, 5);
         />
       </div>
 
+      <!-- Mobile stickers: visible only on small screens -->
+      <div
+        class="pointer-events-none absolute right-[6%] top-[4%] z-20 block sm:hidden"
+      >
+        <img
+          src="/yellow_sparkle_2.gif"
+          alt=""
+          aria-hidden="true"
+          class="w-10 rotate-[10deg] object-contain opacity-90"
+        />
+      </div>
+      <div
+        class="pointer-events-none absolute right-[8%] bottom-[18%] z-20 block sm:hidden"
+      >
+        <img
+          src="/pink_Sparkle.gif"
+          alt=""
+          aria-hidden="true"
+          class="w-9 -rotate-[8deg] object-contain opacity-85"
+        />
+      </div>
+
       <MotionReveal
-        class="relative mx-auto min-h-[42rem] max-w-[112rem] overflow-visible pb-12 sm:min-h-[42rem] sm:pb-12 lg:min-h-[44rem] lg:pb-14 xl:min-h-[48rem]"
+        class="hero-stage relative mx-auto min-h-[100dvh] max-w-[112rem] overflow-visible pb-16 sm:min-h-[42rem] sm:pb-12 lg:min-h-[44rem] lg:pb-14 xl:min-h-[48rem]"
         :delay="70"
         direction="up"
       >
         <div
-          class="absolute left-[2%] right-auto top-[5%] z-0 text-left sm:left-[4%] lg:left-[5%] xl:left-[6%]"
+          class="hero-wordmark absolute left-[2%] right-auto top-[5%] z-0 text-left sm:left-[4%] lg:left-[5%] xl:left-[6%]"
         >
           <p
-            class="font-sans text-[3.25rem] font-light uppercase tracking-[0.24em] text-ink/[0.1] sm:text-[5rem] lg:text-[7.6rem] xl:text-[9.4rem] min-[1440px]:text-[10.8rem]"
+            class="font-sans text-[3.25rem] font-light uppercase tracking-[0.24em] text-ink/[0.17] sm:text-[5rem] lg:text-[7.6rem] xl:text-[9.4rem] min-[1440px]:text-[10.8rem] leading-none"
           >
             <span class="typing-hero">MICHELLE</span>
           </p>
         </div>
 
         <div
-          class="absolute left-1/2 top-[12%] z-20 w-full max-w-[24rem] -translate-x-1/2 sm:max-w-[28rem] lg:top-[10%] lg:max-w-[33rem] xl:max-w-[37rem] min-[1440px]:top-[8%] min-[1440px]:max-w-[40rem]"
+          class="hero-portrait absolute left-1/2 top-[12%] z-20 w-full max-w-[19rem] -translate-x-1/2 sm:max-w-[28rem] lg:top-[10%] lg:max-w-[33rem] xl:max-w-[37rem] min-[1440px]:top-[8%] min-[1440px]:max-w-[40rem]"
         >
           <div
             ref="portraitRef"
@@ -189,7 +211,7 @@ useTilt(portraitRef, 7, 5);
             />
 
             <p
-              class="hero-aprile absolute bottom-[2%] right-[-4%] z-30 translate-x-[14%] font-display text-[2.7rem] font-normal italic tracking-[0.02em] text-ink/92 sm:right-[-5%] sm:text-[3.9rem] lg:right-[-7%] lg:text-[5rem] xl:right-[-8%] xl:text-[5.9rem] min-[1440px]:right-[-9%] min-[1440px]:text-[6.4rem]"
+              class="hero-aprile absolute bottom-[2%] right-[-4%] z-30 translate-x-[14%] font-display text-[2.7rem] font-semibold italic tracking-[0.02em] text-ink sm:right-[-5%] sm:text-[3.9rem] lg:right-[-7%] lg:text-[5rem] xl:right-[-8%] xl:text-[5.9rem] min-[1440px]:right-[-9%] min-[1440px]:text-[6.4rem]"
             >
               APRILE
             </p>
@@ -197,16 +219,21 @@ useTilt(portraitRef, 7, 5);
         </div>
 
         <div
-          class="absolute left-[4%] top-[18.5rem] z-30 w-[14rem] max-w-[68vw] sm:left-[8%] sm:top-[17rem] sm:w-[19rem] lg:left-[10%] lg:top-[18rem] xl:left-[9%] xl:w-[20rem] min-[1440px]:left-[11%]"
+          class="hero-intro-card absolute left-[4%] bottom-[30%] z-30 w-[16rem] max-w-[72vw] sm:bottom-auto sm:left-[5%] sm:top-[17rem] sm:w-[20rem] lg:left-[7%] lg:top-[18rem] xl:left-[5%] xl:w-[22rem] min-[1440px]:left-[7%]"
         >
           <div
             class="paper-layer curve-panel-a rotate-[-5deg] rounded-[2rem] border border-white/60 bg-white/76 p-5 shadow-float backdrop-blur-xl sm:p-6"
           >
             <p
+              class="text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/52 mb-2.5"
+            >
+              Web designer &amp; developer
+            </p>
+            <p
               class="font-display text-[1.45rem] font-normal leading-[1.18] text-ink sm:text-[1.7rem]"
             >
-              I'm Michelle, a front-end developer with a soft spot for styling
-              and visual storytelling.
+              Crafting soft, editorial websites with a focus on storytelling and
+              visual identity.
             </p>
           </div>
         </div>
@@ -227,22 +254,22 @@ useTilt(portraitRef, 7, 5);
         </div>
 
         <div
-          class="absolute left-1/2 top-[78%] z-30 w-full max-w-[42rem] -translate-x-1/2 px-4 sm:top-[72%] lg:top-[73%] xl:max-w-[46rem]"
+          class="hero-actions absolute left-1/2 bottom-[5%] z-30 w-full max-w-[42rem] -translate-x-1/2 px-4 sm:bottom-auto sm:top-[72%] lg:top-[73%] xl:max-w-[46rem]"
         >
           <div
             class="flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <a
               href="#web-projects"
-              class="inline-flex items-center justify-center rounded-full border border-ink/10 bg-white/72 px-6 py-3 text-sm font-medium text-ink shadow-float backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white"
+              class="inline-flex items-center justify-center rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-white shadow-dreamy transition duration-300 hover:-translate-y-1 hover:bg-rose"
             >
               View the work
             </a>
             <a
               href="#about"
-              class="inline-flex items-center justify-center rounded-full border border-white/60 bg-blush/40 px-6 py-3 text-sm font-medium text-ink shadow-float backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white/78"
+              class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/72 px-6 py-3 text-sm font-medium text-ink shadow-float backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white"
             >
-              Read about me
+              About me
             </a>
           </div>
         </div>
@@ -331,6 +358,147 @@ useTilt(portraitRef, 7, 5);
   .typing-hero {
     width: 100%;
     border-right: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-stage {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'wordmark'
+      'portrait'
+      'intro'
+      'actions';
+    gap: 0.2rem;
+    padding-top: 5rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-stage::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 5.4rem;
+    z-index: 0;
+    width: 17.5rem;
+    height: 20rem;
+    transform: translateX(-50%);
+    border-radius: 42% 58% 49% 51% / 38% 36% 64% 62%;
+    background:
+      radial-gradient(
+        circle at 30% 25%,
+        rgba(255, 247, 182, 0.8),
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 72% 34%,
+        rgba(255, 201, 226, 0.72),
+        transparent 36%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.82),
+        rgba(255, 238, 233, 0.28)
+      );
+    filter: blur(10px);
+    opacity: 0.95;
+  }
+
+  .hero-wordmark {
+    position: relative;
+    inset: auto;
+    grid-area: wordmark;
+    text-align: left;
+    padding-left: 0.35rem;
+    z-index: 1;
+  }
+
+  .hero-wordmark p {
+    font-size: 3rem;
+    letter-spacing: 0.14em;
+    text-align: left;
+    opacity: 0.22;
+  }
+
+  .hero-portrait {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    grid-area: portrait;
+    margin: -0.4rem auto 0;
+    max-width: 18rem;
+    z-index: 2;
+    animation: heroMobileDrift 9s ease-in-out infinite;
+  }
+
+  .hero-portrait::after {
+    content: '';
+    position: absolute;
+    inset: auto 8% -1.6rem;
+    height: 4.25rem;
+    border-radius: 999px;
+    background: radial-gradient(
+      circle,
+      rgba(71, 57, 84, 0.18),
+      transparent 70%
+    );
+    filter: blur(14px);
+    z-index: 0;
+  }
+
+  .hero-intro-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: 100%;
+    max-width: none;
+    grid-area: intro;
+    margin-top: -2.2rem;
+    z-index: 3;
+  }
+
+  .hero-intro-card > div {
+    transform: rotate(-3.5deg);
+    border-radius: 2.1rem 1.7rem 2.2rem 1.6rem / 1.7rem 2.25rem 1.8rem 2.4rem;
+    padding: 1.15rem 1.1rem 1.2rem;
+    box-shadow: 0 26px 52px rgba(95, 74, 116, 0.14);
+  }
+
+  .hero-actions {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    top: auto;
+    transform: none;
+    grid-area: actions;
+    max-width: 92%;
+    padding: 0;
+    margin: 0.8rem auto 0;
+    z-index: 3;
+  }
+
+  .hero-actions > div {
+    align-items: stretch;
+    gap: 0.7rem;
+  }
+
+  .hero-actions a {
+    width: 100%;
+    min-height: 3.35rem;
+  }
+}
+
+@keyframes heroMobileDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0.35rem, -0.4rem, 0) rotate(1.1deg);
   }
 }
 </style>
