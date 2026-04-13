@@ -50,7 +50,9 @@ const links = [
     >
       <a
         href="#home"
-        class="font-display text-2xl font-semibold tracking-[0.08em] text-ink transition hover:text-rose"
+        class="site-mark font-display text-2xl font-semibold tracking-[0.08em] text-ink transition hover:text-rose"
+        aria-label="Michelle Aprile"
+        title="Michelle Aprile"
         @click="closeMenu"
       >
         Michelle Aprile
@@ -122,6 +124,12 @@ const links = [
 </template>
 
 <style scoped>
+.site-mark {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 /* ── Desktop nav pills ──────────────────────────────────────────── */
 .nav-pill {
   display: inline-block;
@@ -343,6 +351,11 @@ const links = [
 }
 
 @media (max-width: 639px) {
+  .site-mark {
+    font-size: 1.35rem;
+    letter-spacing: 0.06em;
+  }
+
   .glass-panel {
     border-radius: 1.55rem 1.9rem 1.5rem 1.8rem / 1.4rem 1.8rem 1.6rem 2rem;
     background: linear-gradient(

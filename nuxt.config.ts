@@ -13,6 +13,18 @@ export default defineNuxtConfig({
   app: {
     head: {
       titleTemplate: '%s · Michelle Aprile',
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          href: '/favicon.svg?v=2',
+        },
+        {
+          rel: 'shortcut icon',
+          type: 'image/svg+xml',
+          href: '/favicon.svg?v=2',
+        },
+      ],
       meta: [
         {
           name: 'viewport',
