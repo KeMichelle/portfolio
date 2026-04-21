@@ -442,9 +442,10 @@ function handleProjectPointerLeave() {
     margin: -0.1rem -0.2rem 0;
   }
 
-  /* Taller, edge-to-edge video on mobile */
+  /* Shorter, edge-to-edge video on mobile */
   .project-media-video {
-    min-height: 24rem;
+    min-height: 15.5rem;
+    max-height: 17rem;
     border-radius: 2rem;
     box-shadow: 0 22px 48px rgba(76, 58, 88, 0.16);
   }

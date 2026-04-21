@@ -274,9 +274,13 @@ useTilt(portraitRef, 7, 5);
             </a>
             <a
               href="#about"
-              class="inline-flex items-center justify-center rounded-full border border-white/60 bg-white/72 px-6 py-3 text-sm font-medium text-ink shadow-float backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white"
+              class="hero-about-button inline-flex items-center justify-center rounded-full border border-white/90 bg-white/95 px-6 py-3 text-sm font-semibold text-ink shadow-[0_18px_44px_rgba(71,57,84,0.18)] backdrop-blur-xl transition duration-300 hover:bg-white"
             >
-              About me
+              <span class="hero-about-button__shine" aria-hidden="true" />
+              <span class="hero-about-button__label">About me</span>
+              <span class="hero-about-button__icon-wrap" aria-hidden="true">
+                <span class="hero-about-button__icon">↘</span>
+              </span>
             </a>
           </div>
         </div>
@@ -291,6 +295,80 @@ useTilt(portraitRef, 7, 5);
     aprileFloatIn 980ms cubic-bezier(0.22, 1, 0.36, 1) 1.55s both,
     aprileDrift 5.8s ease-in-out 2.5s infinite;
   transform-origin: center;
+}
+
+.hero-about-button {
+  position: relative;
+  gap: 0.55rem;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.hero-about-button:hover,
+.hero-about-button:focus-visible {
+  transform: translateY(-0.22rem);
+  box-shadow: 0 22px 50px rgba(71, 57, 84, 0.2);
+}
+
+.hero-about-button__shine {
+  position: absolute;
+  inset: -12% auto -12% -35%;
+  width: 3.5rem;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.72),
+    rgba(255, 255, 255, 0)
+  );
+  transform: skewX(-24deg);
+  opacity: 0;
+  transition:
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 260ms ease;
+}
+
+.hero-about-button:hover .hero-about-button__shine,
+.hero-about-button:focus-visible .hero-about-button__shine {
+  transform: translateX(10rem) skewX(-24deg);
+  opacity: 1;
+}
+
+.hero-about-button__label {
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.hero-about-button__icon-wrap {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff6fa, #ffe7f1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition:
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 240ms ease;
+}
+
+.hero-about-button:hover .hero-about-button__icon-wrap,
+.hero-about-button:focus-visible .hero-about-button__icon-wrap {
+  transform: translateX(0.12rem) scale(1.05);
+}
+
+.hero-about-button__icon {
+  font-size: 0.82rem;
+  line-height: 1;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-about-button:hover .hero-about-button__icon,
+.hero-about-button:focus-visible .hero-about-button__icon {
+  transform: translate(0.05rem, -0.05rem);
 }
 
 .typing-hero {
@@ -360,6 +438,13 @@ useTilt(portraitRef, 7, 5);
   .hero-aprile,
   .typing-hero {
     animation: none;
+  }
+
+  .hero-about-button,
+  .hero-about-button__shine,
+  .hero-about-button__icon-wrap,
+  .hero-about-button__icon {
+    transition: none;
   }
 
   .typing-hero {

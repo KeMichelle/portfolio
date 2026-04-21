@@ -14,6 +14,12 @@ type RecentCommit = {
   url: string;
 };
 
+type GitHubFeedResponse = {
+  commits: RecentCommit[];
+  profileUrl: string;
+  status: 'ok' | 'unavailable';
+};
+
 const props = defineProps<{
   codeProjects: CodeProject[];
   friendReviews: FriendReview[];
@@ -78,27 +84,40 @@ const codeFragments = [
   'TODO: fix spacing before coffee',
 ] as const;
 
+const codeFragmentTones = [
+  'from-[#ffe3ef] via-[#fff7fb] to-[#efe6ff]',
+  'from-[#fff3c6] via-[#fff9e8] to-[#ffe9d9]',
+  'from-[#def7ea] via-[#f5fff9] to-[#e6f2ff]',
+  'from-[#efe6ff] via-[#fbf7ff] to-[#ffeaf4]',
+  'from-[#ffe8d8] via-[#fff7ef] to-[#fff1bf]',
+  'from-[#e4f5ff] via-[#f7fcff] to-[#ece6ff]',
+] as const;
+
 const githubProjects = props.codeProjects.slice(0, 3);
 
-const { data: githubFeed, error: githubFeedError } = await useAsyncData(
+const {
+  data: githubFeed,
+  error: githubFeedError,
+  pending: githubFeedPending,
+} = await useAsyncData(
   'github-activity',
-  () =>
-    $fetch<{
-      commits: RecentCommit[];
-      profileUrl: string;
-    }>('/api/github-activity'),
+  () => $fetch<GitHubFeedResponse>('/api/github-activity'),
   {
     default: () => ({
       commits: [],
       profileUrl: 'https://github.com/KeMichelle',
+      status: 'ok',
     }),
   },
 );
 
-const recentCommits = computed(() => githubFeed.value?.commits ?? []);
+const recentCommits = computed(() =>
+  (githubFeed.value?.commits ?? []).slice(0, 3),
+);
 const githubProfileUrl = computed(
   () => githubFeed.value?.profileUrl ?? 'https://github.com/KeMichelle',
 );
+const githubFeedStatus = computed(() => githubFeed.value?.status ?? 'ok');
 
 function formatCommitTime(dateString: string) {
   const timestamp = new Date(dateString).getTime();
@@ -257,12 +276,12 @@ function formatCommitTime(dateString: string) {
 
                 <div
                   :class="[
-                    'hidden sm:block blob-card card-hover-lilt border border-white/65 p-4 shadow-float backdrop-blur-sm transition duration-300 hover:scale-[1.03]',
+                    'hidden sm:block blob-card card-hover-lilt border border-white/65 px-4 py-4 shadow-float backdrop-blur-sm transition duration-300 hover:scale-[1.03]',
                     extraStickyNote.accent === 'yellow'
                       ? 'bg-gradient-to-br from-[#ffe16b] via-[#fff0a8] to-[#ffd5ee]'
                       : 'bg-white/78',
                   ]"
-                  style="border-radius: 56% 44% 39% 61% / 36% 30% 70% 64%"
+                  style="border-radius: 46% 54% 44% 56% / 36% 34% 66% 64%"
                 >
                   <p
                     class="text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/48"
@@ -272,6 +291,11 @@ function formatCommitTime(dateString: string) {
                   <p class="mt-3 text-sm leading-7 text-ink/72">
                     "{{ extraStickyNote.quote }}"
                   </p>
+                  <div
+                    class="mt-3 inline-flex items-center rounded-full border border-white/55 bg-white/45 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/58"
+                  >
+                    design taste + product thinking
+                  </div>
                 </div>
               </div>
 
@@ -294,10 +318,10 @@ function formatCommitTime(dateString: string) {
                   :href="githubProfileUrl"
                   target="_blank"
                   rel="noreferrer"
-                  class="proof-github-link group card-hover-soft tap-safe-press block transition duration-300 hover:scale-[1.02]"
+                  class="proof-github-link group tap-safe-press block rounded-[2.8rem] transition duration-300 hover:scale-[1.02]"
                 >
                   <div
-                    class="proof-github-frame rounded-[2.8rem] border border-white/65 bg-[#d7d2cf] p-4 shadow-[0_28px_80px_rgba(74,59,88,0.2)] transition duration-300 group-hover:shadow-[0_34px_95px_rgba(74,59,88,0.28)]"
+                    class="proof-github-frame card-hover-soft rounded-[2.8rem] border border-white/65 bg-[#d7d2cf] p-4 shadow-[0_28px_80px_rgba(74,59,88,0.2)] transition duration-300 group-hover:shadow-[0_34px_95px_rgba(74,59,88,0.28)]"
                   >
                     <div class="rounded-[2rem] bg-[#f7f2ef] p-4 sm:p-5">
                       <div
@@ -323,7 +347,7 @@ function formatCommitTime(dateString: string) {
                       </div>
 
                       <div
-                        class="mt-4 hidden sm:block rounded-[1.8rem] border border-white/60 bg-[#221d2d] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
+                        class="mt-4 hidden sm:block rounded-[1.8rem] border border-white/70 bg-[linear-gradient(180deg,rgba(255,246,251,0.98),rgba(244,240,255,0.96))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.5),0_18px_42px_rgba(122,94,140,0.12)]"
                       >
                         <div class="flex items-center gap-2">
                           <span class="h-2.5 w-2.5 rounded-full bg-[#ff8ca8]" />
@@ -335,27 +359,27 @@ function formatCommitTime(dateString: string) {
                           <div
                             v-for="commit in recentCommits"
                             :key="commit.id"
-                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/86 transition duration-300 hover:border-white/20 hover:bg-white/10"
+                            class="rounded-[1.4rem] border border-[#eadcf6] bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(255,243,248,0.92))] px-4 py-3 text-ink shadow-[0_12px_28px_rgba(122,94,140,0.08)] transition duration-300 hover:-translate-y-0.5 hover:border-[#dbc8ee] hover:shadow-[0_16px_34px_rgba(122,94,140,0.12)]"
                           >
                             <div
                               class="flex items-center justify-between gap-3"
                             >
                               <p
-                                class="text-sm font-semibold tracking-[0.02em]"
+                                class="text-sm font-semibold tracking-[0.02em] text-ink"
                               >
                                 {{ commit.repoLabel }}
                               </p>
                               <span
-                                class="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45"
+                                class="rounded-full bg-[#f4ecff] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink/62"
                               >
                                 {{ formatCommitTime(commit.createdAt) }}
                               </span>
                             </div>
-                            <p class="mt-2 text-xs leading-6 text-white/78">
+                            <p class="mt-2 text-sm leading-6 text-ink/80">
                               {{ commit.message }}
                             </p>
                             <div
-                              class="mt-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.18em] text-white/45"
+                              class="mt-3 flex items-center justify-between gap-3 text-[10px] uppercase tracking-[0.18em] text-ink/50"
                             >
                               <span>#{{ commit.sha }}</span>
                               <span>recent commit</span>
@@ -363,26 +387,54 @@ function formatCommitTime(dateString: string) {
                           </div>
 
                           <div
-                            v-if="!recentCommits.length && !githubFeedError"
-                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/70"
+                            v-if="githubFeedPending"
+                            class="rounded-[1.4rem] border border-[#eadcf6] bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(255,243,248,0.92))] px-4 py-3 text-ink/88 shadow-[0_12px_28px_rgba(122,94,140,0.08)]"
                           >
-                            <p class="text-sm font-semibold tracking-[0.02em]">
+                            <p
+                              class="text-sm font-semibold tracking-[0.02em] text-ink"
+                            >
                               Loading recent commits
                             </p>
-                            <p class="mt-2 text-xs leading-6 text-white/50">
+                            <p class="mt-2 text-xs leading-6 text-ink/62">
                               Pulling the latest public GitHub activity.
                             </p>
                           </div>
 
                           <div
-                            v-if="githubFeedError"
-                            class="rounded-[1.4rem] border border-white/10 bg-white/6 px-4 py-3 text-white/70"
+                            v-else-if="
+                              githubFeedStatus === 'ok' &&
+                              !recentCommits.length &&
+                              !githubFeedError
+                            "
+                            class="rounded-[1.4rem] border border-[#eadcf6] bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(255,243,248,0.92))] px-4 py-3 text-ink/88 shadow-[0_12px_28px_rgba(122,94,140,0.08)]"
                           >
-                            <p class="text-sm font-semibold tracking-[0.02em]">
+                            <p
+                              class="text-sm font-semibold tracking-[0.02em] text-ink"
+                            >
+                              No public commits found
+                            </p>
+                            <p class="mt-2 text-xs leading-6 text-ink/62">
+                              GitHub only exposes commits from public repos
+                              here. Open the profile to see the full activity
+                              history.
+                            </p>
+                          </div>
+
+                          <div
+                            v-if="
+                              githubFeedError ||
+                              githubFeedStatus === 'unavailable'
+                            "
+                            class="rounded-[1.4rem] border border-[#eadcf6] bg-[linear-gradient(135deg,rgba(255,255,255,0.96),rgba(255,243,248,0.92))] px-4 py-3 text-ink/88 shadow-[0_12px_28px_rgba(122,94,140,0.08)]"
+                          >
+                            <p
+                              class="text-sm font-semibold tracking-[0.02em] text-ink"
+                            >
                               GitHub feed unavailable
                             </p>
-                            <p class="mt-2 text-xs leading-6 text-white/50">
-                              Open the profile to see the latest public
+                            <p class="mt-2 text-xs leading-6 text-ink/62">
+                              GitHub likely rate-limited the public API for this
+                              request. Open the profile to see the latest public
                               activity.
                             </p>
                           </div>
@@ -436,7 +488,10 @@ function formatCommitTime(dateString: string) {
                       <div
                         v-for="(snippet, index) in codeFragments"
                         :key="snippet"
-                        class="card-hover-soft rounded-[1.2rem] border border-[#2e2542]/12 bg-[#f6efe8]/92 px-4 py-3 font-mono text-[11px] text-[#2f243c] shadow-float backdrop-blur-sm transition duration-300 hover:scale-[1.03] hover:shadow-dreamy"
+                        :class="[
+                          'card-hover-soft rounded-[1.2rem] border border-white/70 bg-gradient-to-br px-4 py-3 font-mono text-[11px] text-[#2f243c] shadow-float backdrop-blur-sm transition duration-300 hover:scale-[1.03] hover:shadow-dreamy',
+                          codeFragmentTones[index % codeFragmentTones.length],
+                        ]"
                       >
                         <span
                           class="typing-line"
