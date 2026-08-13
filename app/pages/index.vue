@@ -165,13 +165,7 @@ onBeforeUnmount(() => scrollRevealObs?.disconnect());
       <SkillsSection />
     </div>
 
-    <div
-      ref="sec4"
-      class="scroll-layer"
-      style="--layer: 3"
-      data-cursor="about"
-      :class="['section-scroll-reveal', sec4Vis && 'is-visible']"
-    >
+    <div ref="sec4" class="scroll-layer" style="--layer: 3" data-cursor="about">
       <AboutSection />
     </div>
 

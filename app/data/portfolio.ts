@@ -1,5 +1,11 @@
 export type AccentTone = 'pink' | 'green' | 'lavender' | 'yellow';
 
+export interface CaseStudy {
+  overview: string;
+  role: string[];
+  techDetails: Array<{ label: string; note: string }>;
+}
+
 export interface ShowcaseProject {
   title: string;
   type: string;
@@ -19,6 +25,7 @@ export interface ShowcaseProject {
   previewTone?: string;
   previewScale?: number;
   previewBubbleSize?: number;
+  caseStudy?: CaseStudy;
 }
 
 export interface StoryMoment {
@@ -79,71 +86,71 @@ export const servicePillars: ServicePillar[] = [
 
 export const webProjects: ShowcaseProject[] = [
   {
-    title: 'EDUP Global Flex',
-    type: 'Live client project',
+    title: 'Valentina — Photographer Portfolio',
+    type: 'Featured case study',
     blurb:
-      'A website designed and developed for a UK-based wellness brand, focused on presenting specialised products in a clear, approachable way.',
-    tech: ['Nuxt', 'TypeScript', 'Responsive UI'],
-    tone: 'bg-gradient-to-br from-white via-blush/50 to-peach/60',
-    tilt: 'sm:-rotate-2',
-    metric: 'Authorised UK distributor',
-    note: 'The goal was to simplify complex information and create a calm, trustworthy experience that fits naturally into users\u2019 everyday lives. The structure, layout, and front-end were built to guide users smoothly through the content, while maintaining a soft and non-clinical visual direction.',
-    href: 'https://edupglobalflex.co.uk/',
-    hrefLabel: 'View live site',
-    repoHref: 'https://github.com/KeMichelle/eduardo-website',
-    repoLabel: 'GitHub repo',
-    previewSrc: '/edup_video.mp4',
-    previewTone: 'from-blush/65 via-white/85 to-peach/55',
-    highlights: [
-      'Clear and structured content architecture',
-      'Calm, approachable visual direction',
-      'Fully responsive across devices',
-    ],
-  },
-  {
-    title: 'Valentina \u2014 Photographer Portfolio',
-    type: 'In progress',
-    blurb:
-      'A portfolio website designed to showcase photographic work through a more visual, editorial approach.',
-    tech: ['Image-led layout', 'Visual storytelling', 'Editorial structure'],
+      'A portfolio for Italian photographer Valentina Cometti, where the design had one job: stay out of the way of the photographs.',
+    tech: ['Nuxt', 'TypeScript', 'Vercel', 'Image optimisation'],
     tone: 'bg-gradient-to-br from-white via-lavender/55 to-mint/50',
-    tilt: 'sm:rotate-1',
-    metric: 'In progress',
-    status: 'In progress',
-    note: 'This project focuses on layout, rhythm, and storytelling \u2014 allowing the imagery to lead, while keeping the experience clean and unobtrusive.',
-    repoHref: 'https://github.com/KeMichelle/vale',
-    repoLabel: 'GitHub repo',
+    tilt: '',
+    metric: 'Live · Bergamo, Italy',
+    note: "Six service categories, Vercel-optimised image delivery, and an editorial visual language inspired by the idea that poetry doesn't need to be announced.",
+    href: 'https://www.valentinacomettifotografa.it/',
+    hrefLabel: 'See it live',
+    repoHref: 'https://github.com/KeMichelle/valentina-portfolio',
+    repoLabel: 'View the code',
     previewSrc: '/vale_video.mp4',
     previewTone: 'from-lavender/60 via-white/85 to-mint/50',
     previewScale: 1.04,
     previewBubbleSize: 264,
     highlights: [
-      'Image-led layout',
-      'Visual storytelling',
-      'Editorial structure',
+      'Six service category pages — Maternity, Newborn, Family, Smash Cake, Christmas, MotherNature',
+      'Vercel image CDN for optimised delivery of large photography files',
+      '"Qui si racconta poesie" — poetry-inspired editorial direction',
+      'Responsive mobile-first design',
+      'Contact and inquiry flow',
     ],
+    caseStudy: {
+      overview:
+        "Valentina needed a portfolio where her photography could breathe. No competing UI, no heavy navigation — just images, light, and a little poetry. The site covers six service categories while keeping the same editorial warmth throughout, and loads large photography files fast through Vercel's image CDN.",
+      role: [
+        'Frontend development (Nuxt)',
+        'Responsive UI design',
+        'Image-optimised layout with Vercel CDN',
+        'Multi-page routing and service category pages',
+        'Contact and inquiry flow',
+        'Italian content structure and SEO',
+      ],
+      techDetails: [
+        { label: 'Nuxt', note: 'Multi-page structure' },
+        { label: 'TypeScript', note: 'Type safety' },
+        { label: 'Vercel', note: 'Deployment + image CDN' },
+        { label: 'Image optimisation', note: '_vercel/image' },
+        { label: 'Responsive', note: 'Mobile-first' },
+      ],
+    },
   },
   {
-    title: 'Diana \u2014 Makeup Artist Portfolio',
-    type: 'Next project',
+    title: 'EDUP Global Flex',
+    type: 'Client project',
     blurb:
-      'An upcoming portfolio for a makeup artist, designed to highlight services, aesthetic identity, and client work in a soft and refined way.',
-    tech: [
-      'Service-based structure',
-      'Strong visual identity',
-      'Elegant layout',
-    ],
-    tone: 'bg-gradient-to-br from-white via-butter/55 to-blush/45',
-    tilt: 'sm:-rotate-1',
-    metric: 'Coming soon',
-    status: 'Coming soon',
-    note: 'The direction combines clean structure with a more expressive, beauty-focused visual style.',
-    repoLabel: 'Repo coming soon',
-    previewTone: 'from-butter/55 via-white/85 to-blush/50',
+      'A bilingual production website for a UK wellness technology distributor — dynamic product catalogue, EN/ES localisation, and a secure payment portal.',
+    tech: ['Nuxt 3', 'TypeScript', 'Tailwind CSS', 'Pinia', 'i18n', 'SSR'],
+    tone: 'bg-gradient-to-br from-white via-blush/50 to-peach/60',
+    tilt: '',
+    metric: 'Live · UK-based client',
+    note: '30+ product pages powered by slug-based dynamic routing, English + Spanish throughout, and a private admin payment portal built on Nitro server routes.',
+    href: 'https://edupglobalflex.co.uk/',
+    hrefLabel: 'See it live',
+    repoHref: 'https://github.com/KeMichelle/eduardo-website',
+    repoLabel: 'View the code',
+    previewSrc: '/edup_video.mp4',
+    previewTone: 'from-blush/65 via-white/85 to-peach/55',
     highlights: [
-      'Service-based structure',
-      'Strong visual identity',
-      'Elegant, user-friendly layout',
+      'Bilingual EN + ES with @nuxtjs/i18n',
+      'Dynamic product pages: pages/products/[slug].vue',
+      'Admin payment portal with Nitro server routes',
+      'Responsive mobile-first design',
     ],
   },
 ];
