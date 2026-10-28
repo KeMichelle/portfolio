@@ -35,6 +35,15 @@ const imageClasses = {
   md: 'h-20 w-20 lg:h-32 lg:w-32 xl:h-36 xl:w-36',
   lg: 'h-24 w-24 lg:h-40 lg:w-40 xl:h-44 xl:w-44',
 };
+
+// Intrinsic pixel size (matches the base, mobile-first size in imageClasses)
+// so the browser can reserve the right aspect-ratio box before the asset
+// loads — this prevents layout shift without affecting the responsive CSS size.
+const intrinsicSize = {
+  sm: 64,
+  md: 80,
+  lg: 96,
+};
 </script>
 
 <template>
@@ -59,6 +68,10 @@ const imageClasses = {
       <img
         :src="src"
         :alt="alt"
+        :width="intrinsicSize[size]"
+        :height="intrinsicSize[size]"
+        loading="lazy"
+        decoding="async"
         class="h-full w-full object-contain drop-shadow-[0_10px_25px_rgba(71,57,84,0.12)]"
       />
     </span>

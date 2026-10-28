@@ -513,6 +513,11 @@ function formatCommitTime(dateString: string) {
                 src="/hello_Note.gif"
                 alt=""
                 aria-hidden="true"
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-20 -rotate-[8deg] object-contain opacity-90 animate-float"
               />
             </div>
@@ -523,6 +528,11 @@ function formatCommitTime(dateString: string) {
                 src="/pink_Sparkle.gif"
                 alt=""
                 aria-hidden="true"
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-14 rotate-[10deg] object-contain opacity-90 animate-drift"
               />
             </div>
@@ -533,6 +543,11 @@ function formatCommitTime(dateString: string) {
                 src="/yellow_sparkle_2.gif"
                 alt=""
                 aria-hidden="true"
+                width="400"
+                height="400"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-14 -rotate-[4deg] object-contain opacity-90 animate-float"
               />
             </div>

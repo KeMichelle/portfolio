@@ -726,6 +726,11 @@ onBeforeUnmount(() => {
         src="/yellow_sparkle_1.gif"
         alt=""
         aria-hidden="true"
+        width="64"
+        height="64"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="absolute right-[12%] top-[7%] hidden w-16 object-contain opacity-90 lg:block animate-float"
         :style="parallaxStyle(0.5, -0.3, 8)"
       />
@@ -733,6 +738,11 @@ onBeforeUnmount(() => {
         src="/smiley_face.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="absolute right-[18%] bottom-[8%] hidden w-16 object-contain opacity-90 xl:block animate-float"
         :style="parallaxStyle(0.6, 0.6, -8)"
       />
@@ -807,18 +817,33 @@ onBeforeUnmount(() => {
               src="/hello_Note.gif"
               alt=""
               aria-hidden="true"
+              width="480"
+              height="480"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               class="absolute -left-5 top-6 hidden w-24 -rotate-[10deg] object-contain opacity-95 lg:block animate-float"
             />
             <img
               src="/heart.png"
               alt=""
               aria-hidden="true"
+              width="500"
+              height="500"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               class="absolute right-10 -top-8 hidden w-14 rotate-[8deg] object-contain opacity-90 lg:block animate-drift"
             />
             <img
               src="/pink_Sparkle.gif"
               alt=""
               aria-hidden="true"
+              width="480"
+              height="480"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               class="absolute -right-4 bottom-12 hidden w-16 rotate-[10deg] object-contain opacity-90 xl:block animate-float"
             />
             <div
@@ -948,6 +973,8 @@ onBeforeUnmount(() => {
                     <NuxtImg
                       src="/michelle_cutout.png"
                       alt="Michelle styling cutout"
+                      width="240"
+                      height="240"
                       loading="lazy"
                       decoding="async"
                       fetchpriority="low"
@@ -1037,6 +1064,11 @@ onBeforeUnmount(() => {
                           src="/colorful_lines.gif"
                           alt=""
                           aria-hidden="true"
+                          width="400"
+                          height="400"
+                          loading="lazy"
+                          decoding="async"
+                          fetchpriority="low"
                           class="h-20 w-auto object-contain opacity-85"
                         />
                       </div>

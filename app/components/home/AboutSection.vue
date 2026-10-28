@@ -243,9 +243,14 @@ const techLabels = [
               class="pointer-events-none absolute inset-0 rounded-full bg-[#ffd4ea]/40 blur-2xl"
               aria-hidden="true"
             />
-            <img
+            <NuxtImg
               src="/cutout_michelle_phone_selfie.png"
               alt="Michelle"
+              width="1100"
+              height="1100"
+              format="webp"
+              quality="85"
+              loading="lazy"
               class="relative z-10 object-contain drop-shadow-[0_16px_36px_rgba(71,57,84,0.18)]"
             />
           </div>
@@ -476,9 +481,14 @@ const techLabels = [
             class="pointer-events-none absolute inset-0 rounded-full bg-[#ffd4ea]/45 blur-2xl"
             aria-hidden="true"
           />
-          <img
+          <NuxtImg
             src="/cutout_michelle_phone_selfie.png"
             alt="Michelle"
+            width="1100"
+            height="1100"
+            format="webp"
+            quality="85"
+            loading="lazy"
             class="relative z-10 cursor-float-a object-contain drop-shadow-[0_24px_48px_rgba(71,57,84,0.22)]"
             style="width: clamp(9rem, 20vw, 18rem)"
           />
@@ -503,6 +513,11 @@ const techLabels = [
           <img
             src="/purple_stars.gif"
             alt=""
+            width="400"
+            height="400"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             class="w-10 -rotate-[8deg] opacity-90 sm:w-12"
           />
         </div>
@@ -513,7 +528,16 @@ const techLabels = [
           :style="{ left: '5%', bottom: '14%', ...st(0.03, 0.08, 0.17, 0.23) }"
           aria-hidden="true"
         >
-          <img src="/flower.png" alt="" class="w-9 rotate-[14deg] opacity-80" />
+          <img
+            src="/flower.png"
+            alt=""
+            width="36"
+            height="39"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            class="w-9 rotate-[14deg] opacity-80"
+          />
         </div>
 
         <!-- ─── SCENE 2: ITALY / PERSONAL ────────────────────────────── -->
@@ -585,11 +609,15 @@ const techLabels = [
               aspect-ratio: 3/4;
             "
           >
-            <img
+            <NuxtImg
               src="/_DSC2782i.jpg"
               alt="Michelle"
-              class="h-full w-full object-cover object-center"
+              width="1068"
+              height="1600"
+              format="webp"
+              quality="80"
               loading="lazy"
+              class="h-full w-full object-cover object-center"
             />
           </div>
         </div>
@@ -607,6 +635,11 @@ const techLabels = [
             <img
               src="/italy_london.png"
               alt="Cutout map from Italy to London"
+              width="500"
+              height="500"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               class="w-28 object-contain lg:w-36"
             />
           </div>
@@ -752,6 +785,11 @@ const techLabels = [
           <img
             src="/yellow_sparkle_1.gif"
             alt=""
+            width="36"
+            height="36"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             class="w-9 rotate-[8deg] opacity-80"
           />
         </div>
@@ -823,17 +861,26 @@ const techLabels = [
             class="overflow-hidden shadow-[0_30px_80px_rgba(71,57,84,0.14)]"
             style="border-radius: 50%; aspect-ratio: 1 / 1"
           >
-            <img
+            <NuxtImg
               src="/_DSC2868h.jpg"
               alt="Michelle"
-              class="h-full w-full object-cover object-center"
+              width="1068"
+              height="1600"
+              format="webp"
+              quality="80"
               loading="lazy"
+              class="h-full w-full object-cover object-center"
             />
           </div>
           <img
             src="/pink_Sparkle.gif"
             alt=""
             aria-hidden="true"
+            width="36"
+            height="36"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
             class="pointer-events-none absolute -right-2 -top-2 z-10 w-9 rotate-[14deg] opacity-85 sm:w-11"
           />
         </div>

@@ -54,18 +54,33 @@ function getContactCardClasses(label: string) {
         src="/yellow_sparkle_1.gif"
         alt=""
         aria-hidden="true"
+        width="64"
+        height="64"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="float-orbit left-[4%] top-[12%] hidden w-14 -rotate-[10deg] object-contain opacity-90 lg:block animate-float"
       />
       <img
         src="/left_Arrow_Green.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="float-orbit right-[6%] top-[16%] hidden w-16 rotate-[14deg] object-contain opacity-90 xl:block animate-drift"
       />
       <img
         src="/purple_stars.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="float-orbit left-[48%] bottom-[-0.6rem] hidden w-16 rotate-[7deg] object-contain opacity-75 xl:block animate-float"
       />
 

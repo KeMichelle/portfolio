@@ -308,6 +308,11 @@ function getSkillShellStyle(skill: SkillCard, isActive: boolean) {
           src="/random_lines.png"
           alt=""
           aria-hidden="true"
+          width="500"
+          height="500"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-24 -rotate-[8deg] object-contain opacity-65"
         />
       </div>
@@ -318,6 +323,11 @@ function getSkillShellStyle(skill: SkillCard, isActive: boolean) {
           src="/purple_stars.gif"
           alt=""
           aria-hidden="true"
+          width="400"
+          height="400"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-14 rotate-[10deg] object-contain opacity-90"
         />
       </div>
@@ -328,6 +338,11 @@ function getSkillShellStyle(skill: SkillCard, isActive: boolean) {
           src="/yellow_sparkle_2.gif"
           alt=""
           aria-hidden="true"
+          width="400"
+          height="400"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-12 -rotate-[5deg] object-contain opacity-85"
         />
       </div>
@@ -414,10 +429,13 @@ function getSkillShellStyle(skill: SkillCard, isActive: boolean) {
                 <img
                   :src="skill.src"
                   :alt="`${skill.label} logo`"
+                  width="36"
+                  height="36"
                   class="skill-logo-image h-9 w-9 object-contain"
                   loading="lazy"
                 />
               </div>
+
               <div>
                 <p
                   class="text-[10px] font-semibold uppercase tracking-[0.24em] text-ink/45"
@@ -483,6 +501,8 @@ function getSkillShellStyle(skill: SkillCard, isActive: boolean) {
                 <img
                   :src="skill.src"
                   :alt="`${skill.label} logo`"
+                  width="36"
+                  height="36"
                   class="skill-logo-image h-9 w-9 object-contain"
                   loading="lazy"
                 />

@@ -48,6 +48,11 @@ useTilt(portraitRef, 7, 5);
           src="/yellow_sparkle_2.gif"
           alt=""
           aria-hidden="true"
+          width="64"
+          height="64"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-16 -rotate-[10deg] object-contain opacity-90 animate-float"
         />
       </div>
@@ -59,6 +64,11 @@ useTilt(portraitRef, 7, 5);
           src="/pink_Sparkle.gif"
           alt=""
           aria-hidden="true"
+          width="64"
+          height="64"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-16 rotate-[11deg] object-contain opacity-90 animate-drift"
         />
       </div>
@@ -92,6 +102,11 @@ useTilt(portraitRef, 7, 5);
           src="/yellow_sparkle_1.gif"
           alt=""
           aria-hidden="true"
+          width="56"
+          height="56"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-14 rotate-[8deg] object-contain opacity-85 animate-float"
         />
       </div>
@@ -101,6 +116,11 @@ useTilt(portraitRef, 7, 5);
           src="/colorful_lines.gif"
           alt=""
           aria-hidden="true"
+          width="96"
+          height="96"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-24 -rotate-[10deg] object-contain opacity-85 animate-drift"
         />
       </div>
@@ -113,6 +133,11 @@ useTilt(portraitRef, 7, 5);
           src="/yellow_sparkle_2.gif"
           alt=""
           aria-hidden="true"
+          width="40"
+          height="40"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-10 rotate-[10deg] object-contain opacity-90"
         />
       </div>
@@ -123,6 +148,11 @@ useTilt(portraitRef, 7, 5);
           src="/pink_Sparkle.gif"
           alt=""
           aria-hidden="true"
+          width="36"
+          height="36"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-9 -rotate-[8deg] object-contain opacity-85"
         />
       </div>
@@ -157,6 +187,11 @@ useTilt(portraitRef, 7, 5);
                 src="/shabby_paper_yellow.png"
                 alt=""
                 aria-hidden="true"
+                width="1072"
+                height="861"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-full object-contain drop-shadow-[0_20px_45px_rgba(71,57,84,0.12)]"
               />
             </div>
@@ -168,6 +203,11 @@ useTilt(portraitRef, 7, 5);
                 src="/colorful_lines.gif"
                 alt=""
                 aria-hidden="true"
+                width="400"
+                height="400"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-full object-contain opacity-88"
               />
             </div>
@@ -179,6 +219,11 @@ useTilt(portraitRef, 7, 5);
                 src="/random_lines.png"
                 alt=""
                 aria-hidden="true"
+                width="500"
+                height="500"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-full object-contain opacity-82"
               />
             </div>
@@ -188,6 +233,11 @@ useTilt(portraitRef, 7, 5);
                 src="/yellow_sparkle_1.gif"
                 alt=""
                 aria-hidden="true"
+                width="64"
+                height="64"
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 class="w-16 rotate-12 object-contain opacity-82"
               />
             </div>
@@ -204,9 +254,15 @@ useTilt(portraitRef, 7, 5);
               />
             </div>
 
-            <img
+            <NuxtImg
               src="/michelle_cutout.png"
               alt="Michelle cutout portrait"
+              width="1400"
+              height="1400"
+              format="webp"
+              quality="85"
+              fetchpriority="high"
+              preload
               class="relative z-10 max-h-[21rem] w-auto object-contain drop-shadow-[0_32px_65px_rgba(71,57,84,0.2)] sm:max-h-[27rem] lg:max-h-[34rem] xl:max-h-[38rem] min-[1440px]:max-h-[41rem]"
             />
 
@@ -255,6 +311,11 @@ useTilt(portraitRef, 7, 5);
               src="/flower.png"
               alt=""
               aria-hidden="true"
+              width="588"
+              height="639"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               class="mx-auto w-full max-w-[4.5rem] object-contain opacity-95 sm:max-w-[5.25rem]"
             />
           </div>

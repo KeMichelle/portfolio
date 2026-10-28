@@ -4,13 +4,6 @@ onMounted(() => {
   // from dropping users mid-page after a reload or back-navigation.
   history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
-
-  const userAgent = navigator.userAgent;
-  const isChrome =
-    /Chrome\//.test(userAgent) &&
-    !/(Edg|OPR|Brave|SamsungBrowser)\//.test(userAgent);
-
-  document.documentElement.classList.toggle('browser-chrome', isChrome);
 });
 </script>
 
@@ -19,7 +12,17 @@ onMounted(() => {
     <NuxtLoadingIndicator color="#f2a5c4" />
     <NuxtRouteAnnouncer />
 
-    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <!--
+      `isolate` scopes this layer into its own stacking/compositing context so the
+      `mix-blend-mode: multiply` noise texture below only blends with the ambient
+      blobs behind it, not with the live page content scrolling underneath this
+      fixed overlay. Without it, the browser has to re-composite the blend against
+      freshly-scrolled content on every single scroll frame — the main cause of
+      site-wide scroll stutter, since this layer is present on every page view.
+    -->
+    <div
+      class="pointer-events-none fixed inset-0 -z-10 isolate overflow-hidden"
+    >
       <div
         class="ambient-blob ambient-blob-slow absolute left-[-8rem] top-[-5rem] h-72 w-72 rounded-full bg-blush/60 blur-3xl sm:h-96 sm:w-96"
         style="animation-delay: -3s"
@@ -40,6 +43,8 @@ onMounted(() => {
         src="/random_lines.png"
         alt=""
         aria-hidden="true"
+        width="500"
+        height="500"
         loading="lazy"
         decoding="async"
         fetchpriority="low"
@@ -49,6 +54,8 @@ onMounted(() => {
         src="/yellow_sparkle_2.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
         loading="lazy"
         decoding="async"
         fetchpriority="low"
@@ -58,6 +65,8 @@ onMounted(() => {
         src="/purple_stars.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
         loading="lazy"
         decoding="async"
         fetchpriority="low"
@@ -67,6 +76,8 @@ onMounted(() => {
         src="/colorful_lines.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
         loading="lazy"
         decoding="async"
         fetchpriority="low"

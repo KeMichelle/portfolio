@@ -11,6 +11,36 @@ const otherProjects = computed(() => props.projects.slice(1));
 const decorativeTrack =
   'data:text/vtt;charset=utf-8,WEBVTT%0A%0A00:00.000%20-->%2000:10.000%0ADecorative%20project%20preview%0A';
 
+// Background preview videos only decode/play while actually on screen.
+// Without this, every <video autoplay loop> below keeps decoding frames on
+// the CPU/GPU for the entire session, even scrolled far out of view — one
+// of the biggest contributors to scroll jank on this page.
+const vLazyVideo = {
+  mounted(el: HTMLVideoElement) {
+    el.removeAttribute('autoplay');
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            el.play?.().catch(() => {});
+          } else {
+            el.pause?.();
+          }
+        }
+      },
+      { threshold: 0.1 },
+    );
+    io.observe(el);
+    (el as unknown as { _lazyVideoIO?: IntersectionObserver })._lazyVideoIO =
+      io;
+  },
+  unmounted(el: HTMLVideoElement) {
+    (
+      el as unknown as { _lazyVideoIO?: IntersectionObserver }
+    )._lazyVideoIO?.disconnect();
+  },
+};
+
 // ── Scroll-driven title parallax ────────────────────────────────
 const sectionRef = ref<HTMLElement | null>(null);
 const scrollProgress = ref(0);
@@ -107,6 +137,11 @@ function handleLeave() {
           src="/yellow_sparkle_1.gif"
           alt=""
           aria-hidden="true"
+          width="40"
+          height="40"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           class="w-10 rotate-[12deg] object-contain opacity-90"
         />
       </div>
@@ -114,12 +149,22 @@ function handleLeave() {
         src="/random_lines.png"
         alt=""
         aria-hidden="true"
+        width="500"
+        height="500"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="float-orbit left-[-1%] top-[12%] hidden w-28 -rotate-[16deg] animate-drift object-contain opacity-70 xl:block"
       />
       <img
         src="/left_Arrow_Green.gif"
         alt=""
         aria-hidden="true"
+        width="400"
+        height="400"
+        loading="lazy"
+        decoding="async"
+        fetchpriority="low"
         class="float-orbit bottom-[8%] right-[4%] hidden w-16 rotate-[11deg] animate-float object-contain opacity-90 min-[1440px]:block"
       />
 
@@ -248,6 +293,7 @@ function handleLeave() {
             >
               <video
                 v-if="featured.previewSrc"
+                v-lazy-video
                 :src="featured.previewSrc"
                 autoplay
                 muted
@@ -368,6 +414,7 @@ function handleLeave() {
             style="aspect-ratio: 16/10"
           >
             <video
+              v-lazy-video
               :src="project.previewSrc"
               autoplay
               muted
@@ -459,6 +506,7 @@ function handleLeave() {
               style="aspect-ratio: 3/4"
             >
               <video
+                v-lazy-video
                 :src="project.previewSrc"
                 autoplay
                 muted
